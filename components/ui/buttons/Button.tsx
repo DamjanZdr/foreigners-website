@@ -36,9 +36,9 @@ export default function Button({
   const baseClasses = `inline-flex items-center justify-center gap-2 ${theme.fontWeight.semibold} ${theme.transition.default} relative overflow-hidden`;
   
   const variantClasses = {
-    primary: `bg-brand-primary text-white hover:bg-brand-primary-hover ${theme.shadow.lg}`,
-    secondary: `bg-white text-brand-primary border-2 border-gray-300 hover:border-brand-primary`,
-    outline: `bg-transparent border-2 border-dashed border-brand-primary text-brand-primary hover:bg-brand-primary-light`,
+    primary: `bg-primary text-white hover:bg-primary-hover ${theme.shadow.lg}`,
+    secondary: `bg-white text-primary border-2 border-gray-300 hover:border-primary`,
+    outline: `bg-transparent border-2 border-dashed border-primary text-primary hover:bg-primary-light`,
   };
 
   const sizeClasses = {

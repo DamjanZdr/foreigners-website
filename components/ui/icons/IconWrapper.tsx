@@ -20,9 +20,9 @@ export default function IconWrapper({
   };
 
   const variantClasses = {
-    outline: `border-2 border-brand-primary text-brand-primary ${theme.radius.md}`,
-    filled: `bg-brand-primary text-white ${theme.radius.md}`,
-    circle: `bg-brand-primary text-white ${theme.radius.full}`,
+    outline: `border-2 border-primary text-primary ${theme.radius.md}`,
+    filled: `bg-primary text-white ${theme.radius.md}`,
+    circle: `bg-primary text-white ${theme.radius.full}`,
   };
 
   return (

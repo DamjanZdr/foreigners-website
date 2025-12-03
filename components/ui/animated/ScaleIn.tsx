@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { motion } from 'motion/react';
 import { ReactNode } from 'react';
@@ -39,3 +39,4 @@ export function ScaleIn({
 }
 
 export default ScaleIn;
+

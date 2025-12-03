@@ -12,8 +12,8 @@ export default function Tab({ label, active, onClick }: TabProps) {
       onClick={onClick}
       className={`px-8 py-3 ${theme.radius.full} ${theme.fontWeight.semibold} ${theme.transition.all} ${
         active
-          ? `bg-brand-primary text-white ${theme.shadow.lg}`
-          : `bg-transparent border-2 border-dashed border-brand-primary text-brand-primary hover:bg-brand-primary-light`
+          ? `bg-primary text-white ${theme.shadow.lg}`
+          : `bg-transparent border-2 border-dashed border-primary text-primary hover:bg-primary-light`
       }`}
     >
       {label}

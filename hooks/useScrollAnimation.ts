@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useRef } from 'react';
 import { useInView } from 'motion/react';
@@ -18,3 +18,4 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 }
 
 export default useScrollAnimation;
+

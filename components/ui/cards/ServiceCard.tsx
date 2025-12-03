@@ -23,7 +23,7 @@ export default function ServiceCard({ icon, title, subtitle, description, link }
           {title}
         </h3>
 
-        <p className={`text-brand-primary ${theme.fontWeight.medium} mb-4`}>
+        <p className={`text-primary ${theme.fontWeight.medium} mb-4`}>
           {subtitle}
         </p>
 
@@ -33,7 +33,7 @@ export default function ServiceCard({ icon, title, subtitle, description, link }
 
         <a
           href={link}
-          className={`inline-flex items-center gap-2 text-brand-primary ${theme.fontWeight.semibold} hover:gap-3 ${theme.transition.all}`}
+          className={`inline-flex items-center gap-2 text-primary ${theme.fontWeight.semibold} hover:gap-3 ${theme.transition.all}`}
         >
           View Services
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
