@@ -9,9 +9,6 @@ import { theme } from '@/lib/theme';
 export default function HeroSection() {
   return (
     <Section className="relative overflow-hidden">
-      {/* Animated Background Gradient */}
-      <AnimatedGradient />
-
       {/* Floating Blobs - positioned to bleed around red elements */}
       <FloatingBlob color={theme.colors.primary} size={200} top="35%" left="-5%" delay={0} />
       <FloatingBlob color="#FF4500" size={150} top="25%" left="2%" delay={2} duration={25} />
