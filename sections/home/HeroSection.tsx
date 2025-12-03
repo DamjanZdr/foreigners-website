@@ -5,6 +5,7 @@ import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/buttons';
 import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, FloatingBlob, ParticleField } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
+import { heroContent } from '@/lib/content';
 
 export default function HeroSection() {
   return (
@@ -23,21 +24,20 @@ export default function HeroSection() {
           <div className="space-y-6">
             <FadeIn direction="up" delay={0.1}>
               <h1 className={`${theme.fontSize['4xl']} md:${theme.fontSize['5xl']} lg:${theme.fontSize['6xl']} ${theme.fontWeight.bold} text-gray-900 leading-tight`}>
-                Your Trusted<br />
-                Partner in Poland
+                {heroContent.title.line1}<br />
+                {heroContent.title.line2}
               </h1>
             </FadeIn>
             
             <FadeIn direction="up" delay={0.2}>
               <h2 className={`text-primary ${theme.fontSize.xl} md:${theme.fontSize['2xl']} ${theme.fontWeight.semibold}`}>
-                Solution for Foreigners
+                {heroContent.subtitle}
               </h2>
             </FadeIn>
             
             <FadeIn direction="up" delay={0.3}>
               <p className={`${theme.fontSize.lg} text-gray-600 leading-relaxed`}>
-                Professional assistance with work permits, residence cards, business setup, 
-                and all aspects of living in Poland. We make your transition smooth and legally compliant.
+                {heroContent.description}
               </p>
             </FadeIn>
 
@@ -45,10 +45,10 @@ export default function HeroSection() {
             <FadeIn direction="up" delay={0.4}>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button variant="primary" size="lg">
-                  Free Consultation
+                  {heroContent.buttons.primary}
                 </Button>
                 <Button variant="secondary" size="lg">
-                  Our Services
+                  {heroContent.buttons.secondary}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -71,7 +71,7 @@ export default function HeroSection() {
                   </div>
                 </div>
                 <p className={`${theme.fontSize.sm} text-gray-600`}>
-                  <span className={`${theme.fontWeight.bold} text-gray-900`}>1000+</span> clients trusted us this year
+                  <span className={`${theme.fontWeight.bold} text-gray-900`}>{heroContent.socialProof.count}</span> {heroContent.socialProof.text}
                 </p>
               </div>
             </FadeIn>

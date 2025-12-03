@@ -8,6 +8,7 @@ import { Input, Select, Checkbox } from '@/components/ui/inputs';
 import { Button } from '@/components/ui/buttons';
 import { FadeIn, ScaleIn, AnimatedGradient, FloatingBlob } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
+import { consultationContent } from '@/lib/content';
 
 export default function ConsultationSection() {
   const [formData, setFormData] = useState({
@@ -45,12 +46,10 @@ export default function ConsultationSection() {
             <div className="lg:pr-12">
               <div className={`bg-primary text-white p-12 ${theme.radius.xl} ${theme.shadow['2xl']} backdrop-blur-sm`}>
                 <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} mb-6`}>
-                  Ready to Start Your Immigration Journey?
+                  {consultationContent.heading}
                 </h2>
                 <p className={`${theme.fontSize.lg} text-white/90 leading-relaxed`}>
-                  Book a free consultation with our expert team. We respond within 24 hours 
-                  and provide personalized guidance for your specific situation. Let us help 
-                  you navigate Polish immigration law with confidence.
+                  {consultationContent.description}
                 </p>
               </div>
             </div>
