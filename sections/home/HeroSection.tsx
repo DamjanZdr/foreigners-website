@@ -3,7 +3,7 @@
 import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/buttons';
-import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, FloatingBlob, ParticleField } from '@/components/ui/animated';
+import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, FloatingBlob } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 import { heroContent } from '@/lib/content';
 
@@ -14,9 +14,6 @@ export default function HeroSection() {
       <FloatingBlob color={theme.colors.primary} size={200} top="35%" left="-5%" delay={0} />
       <FloatingBlob color="#FF4500" size={150} top="25%" left="2%" delay={2} duration={25} />
       <FloatingBlob color="#FF8C00" size={120} bottom="5%" right="-5%" delay={4} duration={18} />
-
-      {/* Particle Field */}
-      <ParticleField count={15} color={theme.colors.primary} />
 
       <Container>
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

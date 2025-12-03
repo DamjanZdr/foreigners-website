@@ -1,22 +1,38 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { theme } from '@/lib/theme';
 import { Button } from '@/components/ui/buttons';
 import { useMobileMenu, useScrollPosition } from '@/hooks';
+import { navContent } from '@/lib/content';
 
 export default function Navbar() {
   const { isOpen, toggle, close } = useMobileMenu();
   const { isScrolled } = useScrollPosition();
+  const router = useRouter();
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/services', label: 'Services' },
-    { href: '/about', label: 'About Us' },
-    { href: '/offices', label: 'Offices' },
-    { href: '/consultation', label: 'Consultation' },
-    { href: '/for-companies', label: 'For Companies' },
-  ];
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Check if it's a section anchor link
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+      const sectionId = href.substring(2); // Remove '/#'
+      
+      // If we're already on home page, just scroll
+      if (window.location.pathname === '/') {
+        const element = document.getElementById(sectionId);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Navigate to home page first, then scroll
+        router.push('/');
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+      close();
+    }
+  };
 
   return (
     <nav className={`${theme.glass.light} sticky top-0 z-50 ${theme.transition.default} ${isScrolled ? theme.shadow.lg : theme.shadow.sm}`}>
@@ -34,10 +50,11 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
+            {navContent.links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`text-gray-700 hover:text-primary px-3 py-2 ${theme.fontSize.sm} ${theme.fontWeight.medium} ${theme.transition.default}`}
               >
                 {link.label}
@@ -112,12 +129,12 @@ export default function Navbar() {
               {/* Menu Items */}
               <div className="flex-1 overflow-y-auto p-4">
                 <nav className="space-y-2">
-                  {navLinks.map((link) => (
+                  {navContent.links.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className={`block text-gray-700 hover:text-primary hover:bg-gray-50 px-4 py-3 ${theme.radius.md} ${theme.fontSize.base} ${theme.fontWeight.medium} ${theme.transition.default}`}
-                      onClick={close}
                     >
                       {link.label}
                     </Link>

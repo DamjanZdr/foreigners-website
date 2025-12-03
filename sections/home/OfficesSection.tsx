@@ -26,7 +26,7 @@ export default function OfficesSection() {
   const currentOffice = offices[activeTab];
 
   return (
-    <Section className="relative overflow-hidden">
+    <Section id="offices" className="relative overflow-hidden">
       
       {/* Red blobs positioned around tabs (red when active) and contact links (red) */}
       <FloatingBlob color={theme.colors.primary} size={170} top="5%" left="10%" delay={0} duration={30} />

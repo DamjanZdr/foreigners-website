@@ -2,7 +2,7 @@ import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { ServiceCard } from '@/components/ui/cards';
-import { FadeIn, AnimatedGradient, FloatingBlob } from '@/components/ui/animated';
+import { FadeIn, AnimatedGradient, FloatingBlob, AnimatedTagline } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 import { servicesContent } from '@/lib/content';
 
@@ -37,13 +37,15 @@ const serviceIcons: Record<string, React.ReactNode> = {
 
 export default function ServicesSection() {
   return (
-    <Section className="relative overflow-hidden">
+    <Section id="services" className="relative overflow-hidden">
       {/* Red blobs positioned around service cards (which have red subtitles and links) */}
       <FloatingBlob color={theme.colors.primary} size={180} top="15%" left="-5%" delay={0} duration={32} />
       <FloatingBlob color="#FF4500" size={150} top="40%" right="-5%" delay={1.5} duration={28} />
       <FloatingBlob color="#DC2626" size={130} bottom="10%" left="5%" delay={3} duration={30} />
 
       <Container>
+        <AnimatedTagline />
+        
         <FadeIn direction="up" delay={0.1}>
           <SectionHeading
             description={servicesContent.sectionDescription}
