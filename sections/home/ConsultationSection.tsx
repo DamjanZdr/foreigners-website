@@ -37,7 +37,7 @@ export default function ConsultationSection() {
           {/* Left Column - Text */}
           <FadeIn direction="left" delay={0.1}>
             <div className="lg:pr-12">
-              <div className={`bg-[${theme.colors.primary}] text-white p-12 ${theme.radius.xl}`}>
+              <div className={`bg-primary text-white p-12 ${theme.radius.xl}`}>
                 <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} mb-6`}>
                   Ready to Start Your Immigration Journey?
                 </h2>
@@ -76,7 +76,7 @@ export default function ConsultationSection() {
                       type="tel"
                       id="contactNumber"
                       required
-                      className={`flex-1 px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-[${theme.colors.primary}] focus:ring-2 focus:ring-[${theme.colors.primaryLight}] outline-none ${theme.transition.default}`}
+                      className={`flex-1 px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
                       placeholder="123 456 789"
                       value={formData.contactNumber}
                       onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
@@ -112,11 +112,11 @@ export default function ConsultationSection() {
                   label={
                     <>
                       I have read and accepted the{' '}
-                      <a href="/privacy-policy" className={`text-[${theme.colors.primary}] hover:underline`}>
+                      <a href="/privacy-policy" className="text-primary hover:underline">
                         Privacy Policy
                       </a>
                       {' '}and{' '}
-                      <a href="/terms" className={`text-[${theme.colors.primary}] hover:underline`}>
+                      <a href="/terms" className="text-primary hover:underline">
                         Terms and Conditions of Service
                       </a>
                     </>

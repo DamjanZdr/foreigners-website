@@ -29,7 +29,7 @@ export default function Select({
       <select
         id={id}
         required={required}
-        className={`w-full px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-[${theme.colors.primary}] focus:ring-2 focus:ring-[${theme.colors.primaryLight}] outline-none ${theme.transition.default} bg-white`}
+        className={`w-full px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default} bg-white`}
         value={value}
         onChange={onChange}
       >

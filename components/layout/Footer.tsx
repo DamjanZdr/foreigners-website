@@ -73,7 +73,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={`text-gray-600 hover:text-[${theme.colors.primary}] ${theme.transition.default}`}>
+                  <Link href={link.href} className={`text-gray-600 hover:text-primary ${theme.transition.default}`}>
                     {link.label}
                   </Link>
                 </li>
@@ -87,7 +87,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {usefulLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={`text-gray-600 hover:text-[${theme.colors.primary}] ${theme.transition.default}`}>
+                  <Link href={link.href} className={`text-gray-600 hover:text-primary ${theme.transition.default}`}>
                     {link.label}
                   </Link>
                 </li>
@@ -100,12 +100,12 @@ export default function Footer() {
             <h3 className={`${theme.fontSize.lg} ${theme.fontWeight.bold} text-gray-900 mb-4`}>Need help? Contact us</h3>
             <div className="space-y-4 mb-6">
               <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 ${theme.radius.full} bg-[${theme.colors.primary}] flex items-center justify-center flex-shrink-0`}>
+                <div className={`w-8 h-8 ${theme.radius.full} bg-primary flex items-center justify-center flex-shrink-0`}>
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <a href="mailto:connect@foreigners.pl" className={`text-gray-600 hover:text-[${theme.colors.primary}] ${theme.transition.default}`}>
+                <a href="mailto:connect@foreigners.pl" className={`text-gray-600 hover:text-primary ${theme.transition.default}`}>
                   connect@foreigners.pl
                 </a>
               </div>
@@ -114,7 +114,7 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0">
                   <span className={`text-white ${theme.fontSize.xs} ${theme.fontWeight.bold}`}>W</span>
                 </div>
-                <a href="https://wa.me/48123456789" className={`text-gray-600 hover:text-[${theme.colors.primary}] ${theme.transition.default}`}>
+                <a href="https://wa.me/48123456789" className={`text-gray-600 hover:text-primary ${theme.transition.default}`}>
                   +48 123 456 789
                 </a>
               </div>

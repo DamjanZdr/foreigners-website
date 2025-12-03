@@ -15,7 +15,7 @@ export default function Checkbox({ id, label, checked, onChange, required = fals
         type="checkbox"
         id={id}
         required={required}
-        className={`mt-1 w-4 h-4 rounded border-gray-300 text-[${theme.colors.primary}] focus:ring-[${theme.colors.primary}]`}
+        className={`mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary`}
         checked={checked}
         onChange={onChange}
       />

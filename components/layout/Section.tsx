@@ -11,7 +11,7 @@ export default function Section({ children, className = '', background = 'white'
     white: 'bg-white',
     gray: 'bg-gray-50',
     gradient: 'bg-gradient-to-b from-gray-50 to-white',
-    primary: `bg-[${theme.colors.primary}]`,
+    primary: `bg-primary`,
   };
 
   return (

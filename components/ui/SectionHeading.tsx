@@ -24,7 +24,7 @@ export default function SectionHeading({
   return (
     <div className={`${alignClasses[align]} mb-12 md:mb-16 ${className}`}>
       {subtitle && (
-        <p className={`${theme.fontSize.sm} ${theme.fontWeight.semibold} text-[${theme.colors.primary}] mb-2 uppercase tracking-wide`}>
+        <p className={`${theme.fontSize.sm} ${theme.fontWeight.semibold} text-primary mb-2 uppercase tracking-wide`}>
           {subtitle}
         </p>
       )}

@@ -25,7 +25,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <div className={`w-8 h-8 bg-[${theme.colors.primary}] ${theme.radius.full} flex items-center justify-center text-white ${theme.fontWeight.bold} ${theme.fontSize.sm}`}>
+              <div className={`w-8 h-8 bg-primary ${theme.radius.full} flex items-center justify-center text-white ${theme.fontWeight.bold} ${theme.fontSize.sm}`}>
                 F
               </div>
               <span className={`${theme.fontSize.xl} ${theme.fontWeight.bold} text-gray-800`}>FOREIGNERS.pl</span>
@@ -38,7 +38,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-gray-700 hover:text-[${theme.colors.primary}] px-3 py-2 ${theme.fontSize.sm} ${theme.fontWeight.medium} ${theme.transition.default}`}
+                className={`text-gray-700 hover:text-primary px-3 py-2 ${theme.fontSize.sm} ${theme.fontWeight.medium} ${theme.transition.default}`}
               >
                 {link.label}
               </Link>
@@ -116,7 +116,7 @@ export default function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`block text-gray-700 hover:text-[${theme.colors.primary}] hover:bg-gray-50 px-4 py-3 ${theme.radius.md} ${theme.fontSize.base} ${theme.fontWeight.medium} ${theme.transition.default}`}
+                      className={`block text-gray-700 hover:text-primary hover:bg-gray-50 px-4 py-3 ${theme.radius.md} ${theme.fontSize.base} ${theme.fontWeight.medium} ${theme.transition.default}`}
                       onClick={close}
                     >
                       {link.label}
@@ -129,7 +129,7 @@ export default function Navbar() {
               <div className="p-4 border-t">
                 <Button href="https://wa.me/1234567890" variant="primary" size="lg" className="w-full">
                   <div className={`w-5 h-5 bg-white ${theme.radius.full} flex items-center justify-center`}>
-                    <span className={`text-[${theme.colors.primary}] ${theme.fontSize.xs} ${theme.fontWeight.bold}`}>W</span>
+                    <span className={`text-primary ${theme.fontSize.xs} ${theme.fontWeight.bold}`}>W</span>
                   </div>
                   Contact via WhatsApp
                 </Button>
