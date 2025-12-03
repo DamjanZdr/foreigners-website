@@ -81,8 +81,94 @@ export const theme = {
     default: 'transition-colors duration-200',
     all: 'transition-all duration-300',
     transform: 'transition-transform duration-300',
+    fast: 'transition-all duration-150',
+    slow: 'transition-all duration-500',
+  },
+
+  // Animation Configurations
+  animation: {
+    // Spring configurations for Motion
+    spring: {
+      default: { type: 'spring', stiffness: 300, damping: 30 },
+      bouncy: { type: 'spring', stiffness: 400, damping: 10 },
+      gentle: { type: 'spring', stiffness: 100, damping: 20 },
+      slow: { type: 'spring', stiffness: 50, damping: 15 },
+    },
+    
+    // Timing functions
+    ease: {
+      default: [0.4, 0, 0.2, 1],
+      out: [0, 0, 0.2, 1],
+      in: [0.4, 0, 1, 1],
+      inOut: [0.4, 0, 0.6, 1],
+    },
+
+    // Scroll reveal settings
+    scroll: {
+      initial: { opacity: 0, y: 50 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
+    },
+
+    // Hover lift effect
+    hover: {
+      scale: 1.05,
+      y: -10,
+      transition: { type: 'spring', stiffness: 400, damping: 10 },
+    },
+
+    // Card tilt settings
+    tilt: {
+      max: 15,
+      perspective: 1000,
+      scale: 1.05,
+    },
+  },
+
+  // Gradient Configurations
+  gradients: {
+    animated: {
+      primary: 'linear-gradient(45deg, #AB1604, #FF4500, #AB1604)',
+      hero: 'linear-gradient(135deg, rgba(171, 22, 4, 0.05) 0%, rgba(255, 69, 0, 0.05) 50%, rgba(171, 22, 4, 0.05) 100%)',
+      overlay: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%)',
+    },
+    static: {
+      primary: 'bg-gradient-to-r from-[#AB1604] to-orange-600',
+      radial: 'bg-gradient-to-br from-[#AB1604]/10 via-orange-500/5 to-transparent',
+    },
   },
 } as const;
 
 // Utility function to get theme values
 export const getTheme = () => theme;
+
+// Animation variants for Motion
+export const fadeInUp = {
+  initial: { opacity: 0, y: 60 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -60 },
+};
+
+export const fadeIn = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+export const scaleIn = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.8 },
+};
+
+export const slideInLeft = {
+  initial: { opacity: 0, x: -60 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 60 },
+};
+
+export const slideInRight = {
+  initial: { opacity: 0, x: 60 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -60 },
+};

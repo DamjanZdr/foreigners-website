@@ -6,6 +6,7 @@ import Container from '@/components/layout/Container';
 import { Card } from '@/components/ui/cards';
 import { Input, Select, Checkbox } from '@/components/ui/inputs';
 import { Button } from '@/components/ui/buttons';
+import { FadeIn, ScaleIn } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 
 export default function ConsultationSection() {
@@ -34,29 +35,32 @@ export default function ConsultationSection() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text */}
-          <div className="lg:pr-12">
-            <div className={`bg-[${theme.colors.primary}] text-white p-12 ${theme.radius.xl}`}>
-              <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} mb-6`}>
-                Ready to Start Your Immigration Journey?
-              </h2>
-              <p className={`${theme.fontSize.lg} text-white/90 leading-relaxed`}>
-                Book a free consultation with our expert team. We respond within 24 hours 
-                and provide personalized guidance for your specific situation. Let us help 
-                you navigate Polish immigration law with confidence.
-              </p>
+          <FadeIn direction="left" delay={0.1}>
+            <div className="lg:pr-12">
+              <div className={`bg-[${theme.colors.primary}] text-white p-12 ${theme.radius.xl}`}>
+                <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} mb-6`}>
+                  Ready to Start Your Immigration Journey?
+                </h2>
+                <p className={`${theme.fontSize.lg} text-white/90 leading-relaxed`}>
+                  Book a free consultation with our expert team. We respond within 24 hours 
+                  and provide personalized guidance for your specific situation. Let us help 
+                  you navigate Polish immigration law with confidence.
+                </p>
+              </div>
             </div>
-          </div>
+          </FadeIn>
 
           {/* Right Column - Form Card */}
-          <div className="relative">
-            <Card padding="lg" className={theme.shadow['2xl']}>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <Input
-                  id="fullName"
-                  label="Full Name"
-                  required
-                  placeholder="Enter your full name"
-                  value={formData.fullName}
+          <ScaleIn delay={0.3}>
+            <div className="relative">
+              <Card padding="lg" className={theme.shadow['2xl']}>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <Input
+                    id="fullName"
+                    label="Full Name"
+                    required
+                    placeholder="Enter your full name"
+                    value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 />
 
@@ -125,6 +129,7 @@ export default function ConsultationSection() {
               </form>
             </Card>
           </div>
+          </ScaleIn>
         </div>
       </Container>
     </Section>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import Tab from '@/components/ui/Tab';
+import { FadeIn, SlideIn } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 
 type Office = {
@@ -55,29 +56,32 @@ export default function OfficesSection() {
     <Section background="gray">
       <Container>
         {/* Tabs */}
-        <div className="flex flex-wrap gap-4 justify-center mb-12">
-          <Tab label="Warsaw" active={activeTab === 'warsaw'} onClick={() => setActiveTab('warsaw')} />
-          <Tab label="Katowice" active={activeTab === 'katowice'} onClick={() => setActiveTab('katowice')} />
-          <Tab label="Other" active={activeTab === 'other'} onClick={() => setActiveTab('other')} />
-        </div>
+        <FadeIn direction="up" delay={0.1}>
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            <Tab label="Warsaw" active={activeTab === 'warsaw'} onClick={() => setActiveTab('warsaw')} />
+            <Tab label="Katowice" active={activeTab === 'katowice'} onClick={() => setActiveTab('katowice')} />
+            <Tab label="Other" active={activeTab === 'other'} onClick={() => setActiveTab('other')} />
+          </div>
+        </FadeIn>
 
         {/* Office Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Column - Office Info */}
-          <div className="space-y-6">
-            <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} text-gray-900`}>
-              {currentOffice.heading}
-            </h2>
-            
-            <p className={`${theme.fontSize.lg} text-gray-600 leading-relaxed`}>
-              {currentOffice.description}
-            </p>
+          <SlideIn direction="left" delay={0.2}>
+            <div className="space-y-6">
+              <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} text-gray-900`}>
+                {currentOffice.heading}
+              </h2>
+              
+              <p className={`${theme.fontSize.lg} text-gray-600 leading-relaxed`}>
+                {currentOffice.description}
+              </p>
 
-            <p className="text-gray-600">
-              <a href="/consultation" className={`text-[${theme.colors.primary}] ${theme.fontWeight.semibold} hover:underline`}>
-                Schedule an appointment
-              </a>
-            </p>
+              <p className="text-gray-600">
+                <a href="/consultation" className={`text-[${theme.colors.primary}] ${theme.fontWeight.semibold} hover:underline`}>
+                  Schedule an appointment
+                </a>
+              </p>
 
             <div className="space-y-4 pt-4">
               <div>
@@ -105,21 +109,23 @@ export default function OfficesSection() {
                 </a>
               </div>
             </div>
-          </div>
+          </SlideIn>
 
           {/* Right Column - Map */}
-          <div className={`w-full h-96 bg-gray-200 ${theme.radius.lg} overflow-hidden ${theme.shadow.lg}`}>
-            <iframe
-              src={currentOffice.mapEmbed}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={`${currentOffice.name} Office Location`}
-            ></iframe>
-          </div>
+          <SlideIn direction="right" delay={0.3}>
+            <div className={`w-full h-96 bg-gray-200 ${theme.radius.lg} overflow-hidden ${theme.shadow.lg}`}>
+              <iframe
+                src={currentOffice.mapEmbed}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`${currentOffice.name} Office Location`}
+              ></iframe>
+            </div>
+          </SlideIn>
         </div>
       </Container>
     </Section>

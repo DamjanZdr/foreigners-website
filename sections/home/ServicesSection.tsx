@@ -2,6 +2,7 @@ import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { ServiceCard } from '@/components/ui/cards';
+import { FadeIn } from '@/components/ui/animated';
 
 export default function ServicesSection() {
   const services = [
@@ -65,20 +66,23 @@ export default function ServicesSection() {
   return (
     <Section background="gradient">
       <Container>
-        <SectionHeading
-          description="Solution in every aspect of your life as a foreigner in Poland. From A to Z."
-        />
+        <FadeIn direction="up" delay={0.1}>
+          <SectionHeading
+            description="Solution in every aspect of your life as a foreigner in Poland. From A to Z."
+          />
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              subtitle={service.subtitle}
-              description={service.description}
-              link={service.link}
-            />
+            <FadeIn key={index} direction="up" delay={0.2 + index * 0.1}>
+              <ServiceCard
+                icon={service.icon}
+                title={service.title}
+                subtitle={service.subtitle}
+                description={service.description}
+                link={service.link}
+              />
+            </FadeIn>
           ))}
         </div>
       </Container>
