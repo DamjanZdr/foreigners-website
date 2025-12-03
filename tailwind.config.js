@@ -1,3 +1,6 @@
+// Import theme values from our single source of truth
+const { theme: appTheme } = require('./lib/theme.ts');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,10 +11,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brand-primary': '#AB1604',
-        'brand-primary-hover': '#8B1203',
-        'brand-primary-light': 'rgba(171, 22, 4, 0.1)',
-        'brand-secondary': '#FF4500',
+        // Pull colors directly from theme.ts
+        'brand-primary': appTheme.colors.primary,
+        'brand-primary-hover': appTheme.colors.primaryHover,
+        'brand-primary-light': appTheme.colors.primaryLight,
+        'brand-secondary': appTheme.colors.secondary,
       },
     },
   },
