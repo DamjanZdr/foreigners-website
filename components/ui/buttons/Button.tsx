@@ -1,1 +1,126 @@
-'use client';\n\nimport { motion } from 'motion/react';\nimport { theme } from '@/lib/theme';\nimport { useState, MouseEvent } from 'react';\n\ninterface ButtonProps {\n  children: React.ReactNode;\n  variant?: 'primary' | 'secondary' | 'outline';\n  size?: 'sm' | 'md' | 'lg';\n  className?: string;\n  href?: string;\n  onClick?: () => void;\n  type?: 'button' | 'submit';\n  enableRipple?: boolean;\n}\n\ninterface Ripple {\n  x: number;\n  y: number;\n  id: number;\n}\n\nexport default function Button({\n  children,\n  variant = 'primary',\n  size = 'md',\n  className = '',\n  href,\n  onClick,\n  type = 'button',\n  enableRipple = true,\n}: ButtonProps) {\n  const [ripples, setRipples] = useState<Ripple[]>([]);\n\n  const baseClasses = `inline-flex items-center justify-center gap-2 ${theme.fontWeight.semibold} ${theme.transition.default} relative overflow-hidden`;\n  \n  const variantClasses = {\n    primary: `bg-[${theme.colors.primary}] text-white hover:bg-[${theme.colors.primaryHover}] ${theme.shadow.lg}`,\n    secondary: `bg-white text-[${theme.colors.primary}] border-2 border-gray-300 hover:border-[${theme.colors.primary}]`,\n    outline: `bg-transparent border-2 border-dashed border-[${theme.colors.primary}] text-[${theme.colors.primary}] hover:bg-[${theme.colors.primaryLight}]`,\n  };\n\n  const sizeClasses = {\n    sm: `px-4 py-2 ${theme.fontSize.sm} ${theme.radius.full}`,\n    md: `px-6 py-3 ${theme.fontSize.base} ${theme.radius.full}`,\n    lg: `px-8 py-4 ${theme.fontSize.lg} ${theme.radius.full}`,\n  };\n\n  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;\n\n  const handleClick = (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {\n    if (enableRipple) {\n      const element = e.currentTarget;\n      const rect = element.getBoundingClientRect();\n      const x = e.clientX - rect.left;\n      const y = e.clientY - rect.top;\n\n      const newRipple = {\n        x,\n        y,\n        id: Date.now(),\n      };\n\n      setRipples([...ripples, newRipple]);\n\n      setTimeout(() => {\n        setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));\n      }, 600);\n    }\n\n    onClick?.();\n  };\n\n  const rippleContent = (\n    <>\n      {ripples.map((ripple) => (\n        <motion.span\n          key={ripple.id}\n          className=\"absolute rounded-full bg-white\"\n          style={{\n            left: ripple.x,\n            top: ripple.y,\n            width: 0,\n            height: 0,\n            transform: 'translate(-50%, -50%)',\n            opacity: variant === 'primary' ? 0.3 : 0.2,\n          }}\n          initial={{ width: 0, height: 0, opacity: variant === 'primary' ? 0.3 : 0.2 }}\n          animate={{ width: 300, height: 300, opacity: 0 }}\n          transition={{ duration: 0.6, ease: 'easeOut' }}\n        />\n      ))}\n    </>\n  );\n\n  if (href) {\n    return (\n      <motion.a\n        href={href}\n        className={classes}\n        onClick={handleClick}\n        whileHover={{ scale: 1.05 }}\n        whileTap={{ scale: 0.95 }}\n        transition={theme.animation.spring.default}\n      >\n        {children}\n        {rippleContent}\n      </motion.a>\n    );\n  }\n\n  return (\n    <motion.button\n      type={type}\n      onClick={handleClick}\n      className={classes}\n      whileHover={{ scale: 1.05 }}\n      whileTap={{ scale: 0.95 }}\n      transition={theme.animation.spring.default}\n    >\n      {children}\n      {rippleContent}\n    </motion.button>\n  );\n}
+'use client';
+
+import { motion } from 'motion/react';
+import { theme } from '@/lib/theme';
+import { useState, MouseEvent } from 'react';
+
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  href?: string;
+  onClick?: () => void;
+  type?: 'button' | 'submit';
+  enableRipple?: boolean;
+}
+
+interface Ripple {
+  x: number;
+  y: number;
+  id: number;
+}
+
+export default function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  href,
+  onClick,
+  type = 'button',
+  enableRipple = true,
+}: ButtonProps) {
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+
+  const baseClasses = `inline-flex items-center justify-center gap-2 ${theme.fontWeight.semibold} ${theme.transition.default} relative overflow-hidden`;
+  
+  const variantClasses = {
+    primary: `bg-[${theme.colors.primary}] text-white hover:bg-[${theme.colors.primaryHover}] ${theme.shadow.lg}`,
+    secondary: `bg-white text-[${theme.colors.primary}] border-2 border-gray-300 hover:border-[${theme.colors.primary}]`,
+    outline: `bg-transparent border-2 border-dashed border-[${theme.colors.primary}] text-[${theme.colors.primary}] hover:bg-[${theme.colors.primaryLight}]`,
+  };
+
+  const sizeClasses = {
+    sm: `px-4 py-2 ${theme.fontSize.sm} ${theme.radius.full}`,
+    md: `px-6 py-3 ${theme.fontSize.base} ${theme.radius.full}`,
+    lg: `px-8 py-4 ${theme.fontSize.lg} ${theme.radius.full}`,
+  };
+
+  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    if (enableRipple) {
+      const element = e.currentTarget;
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const newRipple = {
+        x,
+        y,
+        id: Date.now(),
+      };
+
+      setRipples([...ripples, newRipple]);
+
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+      }, 600);
+    }
+
+    onClick?.();
+  };
+
+  const rippleContent = (
+    <>
+      {ripples.map((ripple) => (
+        <motion.span
+          key={ripple.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            width: 0,
+            height: 0,
+            transform: 'translate(-50%, -50%)',
+            opacity: variant === 'primary' ? 0.3 : 0.2,
+          }}
+          initial={{ width: 0, height: 0, opacity: variant === 'primary' ? 0.3 : 0.2 }}
+          animate={{ width: 300, height: 300, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        />
+      ))}
+    </>
+  );
+
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        className={classes}
+        onClick={handleClick}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={theme.animation.spring.default}
+      >
+        {children}
+        {rippleContent}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.button
+      type={type}
+      onClick={handleClick}
+      className={classes}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={theme.animation.spring.default}
+    >
+      {children}
+      {rippleContent}
+    </motion.button>
+  );
+}

@@ -83,30 +83,31 @@ export default function OfficesSection() {
                 </a>
               </p>
 
-            <div className="space-y-4 pt-4">
-              <div>
-                <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Location</h4>
-                <p className="text-gray-600">{currentOffice.address}</p>
-              </div>
+              <div className="space-y-4 pt-4">
+                <div>
+                  <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Location</h4>
+                  <p className="text-gray-600">{currentOffice.address}</p>
+                </div>
 
-              <div>
-                <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Number (WhatsApp)</h4>
-                <a
-                  href={`https://wa.me/${currentOffice.phone.replace(/\s/g, '')}`}
-                  className={`text-[${theme.colors.primary}] hover:underline`}
-                >
-                  {currentOffice.phone}
-                </a>
-              </div>
+                <div>
+                  <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Number (WhatsApp)</h4>
+                  <a
+                    href={`https://wa.me/${currentOffice.phone.replace(/\s/g, '')}`}
+                    className={`text-[${theme.colors.primary}] hover:underline`}
+                  >
+                    {currentOffice.phone}
+                  </a>
+                </div>
 
-              <div>
-                <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Email</h4>
-                <a
-                  href={`mailto:${currentOffice.email}`}
-                  className={`text-[${theme.colors.primary}] hover:underline`}
-                >
-                  {currentOffice.email}
-                </a>
+                <div>
+                  <h4 className={`${theme.fontWeight.semibold} text-gray-900 mb-1`}>Email</h4>
+                  <a
+                    href={`mailto:${currentOffice.email}`}
+                    className={`text-[${theme.colors.primary}] hover:underline`}
+                  >
+                    {currentOffice.email}
+                  </a>
+                </div>
               </div>
             </div>
           </SlideIn>
