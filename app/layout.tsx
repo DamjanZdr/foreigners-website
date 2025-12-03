@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-gradient-to-br from-white via-gray-50/30 to-white`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white`}
       >
         <CustomCursor />
         {children}

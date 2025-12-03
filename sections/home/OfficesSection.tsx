@@ -56,9 +56,9 @@ export default function OfficesSection() {
     <Section className="relative overflow-hidden">
       
       {/* Red blobs positioned around tabs (red when active) and contact links (red) */}
-      <FloatingBlob color={theme.colors.primary} size={380} top="5%" left="15%" delay={0} duration={30} />
-      <FloatingBlob color="#FF4500" size={320} bottom="15%" right="-8%" delay={2} duration={26} />
-      <FloatingBlob color="#DC2626" size={250} top="50%" left="-10%" delay={4} duration={28} />
+      <FloatingBlob color={theme.colors.primary} size={170} top="5%" left="10%" delay={0} duration={30} />
+      <FloatingBlob color="#FF4500" size={140} bottom="15%" right="-4%" delay={2} duration={26} />
+      <FloatingBlob color="#DC2626" size={110} top="50%" left="-5%" delay={4} duration={28} />
 
       <Container>
         {/* Tabs */}

@@ -11,8 +11,8 @@ export default function MidCtaSection() {
     <Section className="relative overflow-hidden">
       
       {/* Red blob positioned around CTA button */}
-      <FloatingBlob color={theme.colors.primary} size={400} top="30%" left="30%" delay={0} duration={28} />
-      <FloatingBlob color="#FF4500" size={300} top="20%" right="20%" delay={1.5} duration={24} />
+      <FloatingBlob color={theme.colors.primary} size={180} top="30%" left="30%" delay={0} duration={28} />
+      <FloatingBlob color="#FF4500" size={140} top="20%" right="20%" delay={1.5} duration={24} />
 
       <Container className="text-center">
         <FadeIn direction="up" delay={0.1}>

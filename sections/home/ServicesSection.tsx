@@ -69,9 +69,9 @@ export default function ServicesSection() {
       {/* Remove gradient overlay, let blobs do the work */}
       
       {/* Red blobs positioned around service cards (which have red subtitles and links) */}
-      <FloatingBlob color={theme.colors.primary} size={400} top="15%" left="-12%" delay={0} duration={32} />
-      <FloatingBlob color="#FF4500" size={350} top="40%" right="-10%" delay={1.5} duration={28} />
-      <FloatingBlob color="#DC2626" size={300} bottom="10%" left="10%" delay={3} duration={30} />
+      <FloatingBlob color={theme.colors.primary} size={180} top="15%" left="-5%" delay={0} duration={32} />
+      <FloatingBlob color="#FF4500" size={150} top="40%" right="-5%" delay={1.5} duration={28} />
+      <FloatingBlob color="#DC2626" size={130} bottom="10%" left="5%" delay={3} duration={30} />
 
       <Container>
         <FadeIn direction="up" delay={0.1}>

@@ -34,9 +34,9 @@ export default function ConsultationSection() {
     <Section className="relative overflow-hidden">
       
       {/* Red blobs positioned around red CTA panel (left side) and form */}
-      <FloatingBlob color={theme.colors.primary} size={500} top="20%" left="-15%" delay={0} duration={35} />
-      <FloatingBlob color="#FF4500" size={380} top="10%" left="5%" delay={1} duration={30} />
-      <FloatingBlob color="#DC2626" size={320} bottom="-5%" right="-12%" delay={3} duration={28} />
+      <FloatingBlob color={theme.colors.primary} size={200} top="20%" left="-7%" delay={0} duration={35} />
+      <FloatingBlob color="#FF4500" size={160} top="10%" left="2%" delay={1} duration={30} />
+      <FloatingBlob color="#DC2626" size={140} bottom="-5%" right="-6%" delay={3} duration={28} />
 
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
