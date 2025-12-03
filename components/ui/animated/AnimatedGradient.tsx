@@ -15,7 +15,7 @@ export function AnimatedGradient({ className = '' }: AnimatedGradientProps) {
     <motion.div
       className={`absolute inset-0 -z-10 ${className}`}
       style={{
-        background: `linear-gradient(135deg, 
+        backgroundImage: `linear-gradient(135deg, 
           rgba(171, 22, 4, 0.05) ${position}%, 
           rgba(255, 69, 0, 0.08) ${position + 25}%, 
           rgba(171, 22, 4, 0.05) ${position + 50}%)`,
