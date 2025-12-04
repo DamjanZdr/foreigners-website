@@ -30,7 +30,7 @@ export default function Input({
         type={type}
         id={id}
         required={required}
-        className={`w-full px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
+        className={`w-full px-4 py-3 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

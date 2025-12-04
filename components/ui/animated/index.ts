@@ -4,6 +4,7 @@ export { SlideIn } from './SlideIn';
 export { Tilt3D } from './Tilt3D';
 export { AnimatedGradient } from './AnimatedGradient';
 export { FloatingBlob } from './FloatingBlob';
+export { default as GlassBlob } from './GlassBlob';
 export { ParticleField } from './ParticleField';
 export { RippleButton } from './RippleButton';
 export { default as AnimatedTagline } from './AnimatedTagline';

@@ -3,14 +3,16 @@
 export const drivingContent = {
   hero: {
     title: 'Driving',
-    subtitle: 'Get on the road with confidence',
-    description: 'Need help with Polish driving license exchange, international permits, or understanding traffic regulations? Fill out the form and our specialists will be in touch with you as soon as possible.',
+    subtitle: 'Get behind the wheel - we handle the rest',
+    description: 'Need help with car registration, driving licenses, or parking permits? Fill out the form and our specialists will be in touch with you as soon as possible.',
     ctaButton: 'Our Services',
+    formTitle: 'Driving Consultation',
+    formSource: 'driving-service',
   },
   trust: {
-    heading: 'Your case is unique? - Let us know.',
+    heading: 'Your case is unique? Let us know.',
     subheading: 'We will tailor the service for you.',
-    description: "Navigating Polish driving regulations can be confusing, especially when dealing with license exchanges, translations, and local requirements. Whether you're converting a foreign license, need international permits, or want to understand Polish traffic laws, we provide clear guidance and handle all the paperwork. Drive legally and confidently in Poland.",
+    description: "Driving regulations vary greatly depending on your country of origin - and that's just the start. Your current license type, how soon it expires, the basis of your stay in Poland, and how long you've been here all affect what steps you need to take. Whether it's registration, a new license, or conversion, we don't just give one-size-fits-all answers. We take the time to understand your full situation and guide you through the right process - clearly, personally, and with zero guesswork.",
     stats: {
       period: '6 months',
       count: '300+',
@@ -22,36 +24,24 @@ export const drivingContent = {
     searchPlaceholder: 'Looking for something?',
     items: [
       {
-        question: 'What driving services do you offer?',
-        answer: 'We provide comprehensive driving-related services including Polish driving license exchange, international driving permits, license translations, driving test preparation, and guidance on Polish traffic regulations.',
+        question: 'What do our driving services include?',
+        answer: 'The only thing we don\'t assist with is learning to drive. Everything else - from paperwork to office visits - we\'ve got covered. This includes, but is not limited to: Car Registration, New Driving License, Driving License Conversion, and Parking Permit.',
       },
       {
-        question: 'Polish Driving License Exchange',
-        answer: 'If you hold a valid foreign driving license, you may be eligible to exchange it for a Polish one without taking additional tests. We help you determine eligibility based on your country of origin, prepare all required documents including sworn translations, and submit your application to the appropriate city office. The process typically takes 1-3 months depending on the office.',
+        question: 'New Driving License',
+        answer: 'If you\'ve never held a driving license before and want to get one in Poland, you\'ll need to go through the official process - medical checks, driving school, exams, and then applying for the license. The system has specific rules for foreigners depending on your residence type, country of origin, and how long you\'ve stayed in Poland.\n\nWe can support you through the entire process. From booking a medical exam to finding an English-speaking driving school and explaining every step along the way, we\'re here to make sure you don\'t waste time or money. We\'ll also help you apply for the license once you pass your exams, so everything is submitted correctly with no delays.',
       },
       {
-        question: 'International Driving Permit',
-        answer: 'An International Driving Permit (IDP) is a translation of your national driving license that allows you to drive in foreign countries. We guide you through obtaining an IDP if you plan to drive outside Poland, or help you understand when your foreign IDP is valid in Poland and for how long.',
+        question: 'Driving License Conversion',
+        answer: 'Converting your foreign license to a Polish one isn\'t as straightforward as it seems. The rules vary based on which country issued your license, when it was issued, its current status (valid, expired, temporary), and how long you\'ve lived in Poland. Some licenses can be exchanged directly, while others may require additional tests or paperwork.\n\nWe analyze your specific case and guide you through the correct procedure. Whether your license is from the EU, a recognized treaty country, or a non-recognized one, we\'ll tell you what\'s possible, what\'s needed, and how long it will take. We prepare and submit the application for you, deal with the translation and paperwork, and follow up with the office if needed.',
       },
       {
-        question: 'Sworn Translation of Driving License',
-        answer: 'For many administrative procedures in Poland, you need a sworn translation of your driving license. We arrange professional sworn translations that are officially recognized by Polish authorities, necessary for license exchange, residence permits, and other official matters.',
+        question: 'Parking Permit',
+        answer: 'Parking permits in Poland are issued based on your place of residence and can apply to specific city zones or national disability programs. Having a registered address and proof of car ownership may be required - and the process changes slightly between cities.\n\nWe help you check if you\'re eligible, gather the needed documents, and apply for the right type of permit. Whether it\'s a local resident pass or something more specialized, we handle the application and communication with the city office, so you don\'t need to worry about missing steps or language barriers.',
       },
       {
-        question: 'Polish Driving Test Preparation',
-        answer: 'If you need to obtain a Polish driving license from scratch or your foreign license is not eligible for exchange, we help you find suitable driving schools, explain the theoretical and practical exam requirements, and guide you through the entire process of getting your Polish driving license.',
-      },
-      {
-        question: 'Understanding Polish Traffic Laws',
-        answer: 'Polish traffic regulations may differ significantly from your home country. We provide consultations on important rules including speed limits, right-of-way, winter tire requirements, required car equipment, alcohol limits, and penalties. Understanding these rules helps you drive safely and avoid fines.',
-      },
-      {
-        question: 'Vehicle Registration Assistance',
-        answer: 'If you bring a car to Poland or purchase one here, we help with vehicle registration procedures, understanding required insurance, technical inspections, and emission standards. We guide you through the paperwork to ensure your vehicle is legally registered.',
-      },
-      {
-        question: 'Driving License Validity Check',
-        answer: 'Not sure if your foreign driving license is valid in Poland or for how long? We assess your situation based on your residency status, nationality, and license type, and advise you on when you need to exchange it or obtain a Polish license.',
+        question: 'Car Registration',
+        answer: 'Registering a car in Poland means officially linking the vehicle to your name and legal stay. It\'s required whether you\'ve bought a car in Poland or brought one from abroad. The process can involve multiple steps - from technical inspections and emissions stickers to insurance and tax payments. Requirements can differ based on where the car is from, your residence status, and whether the car is new or used.\n\nWe handle the full registration process for you. Whether you\'ve already purchased a vehicle or are just planning to, we help gather the right documents, prepare the necessary forms, and take care of visits to the proper offices. You won\'t need to worry about language barriers or missing anything - we guide you from start to finish until your car is legally registered and road-ready.',
       },
     ],
   },

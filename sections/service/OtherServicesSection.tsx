@@ -47,9 +47,10 @@ export default function OtherServicesSection({ heading, ctaButton, alternativeTe
                 <Link
                   key={index}
                   href={`/services/${category.toLowerCase()}`}
-                  className={`${theme.fontSize.lg} ${theme.fontWeight.medium} text-primary hover:underline transition-all`}
+                  className={`${theme.fontSize.lg} ${theme.fontWeight.medium} text-primary relative group transition-all`}
                 >
                   {category}
+                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                 </Link>
               ))}
             </div>

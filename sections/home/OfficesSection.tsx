@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import Tab from '@/components/ui/Tab';
-import { FadeIn, SlideIn, AnimatedGradient, FloatingBlob } from '@/components/ui/animated';
+import { FadeIn, SlideIn, AnimatedGradient, GlassBlob } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 import { officesContent } from '@/lib/content';
 
@@ -28,12 +28,13 @@ export default function OfficesSection() {
   return (
     <Section id="offices" className="relative overflow-hidden">
       
-      {/* Red blobs positioned around tabs (red when active) and contact links (red) */}
-      <FloatingBlob color={theme.colors.primary} size={170} top="5%" left="10%" delay={0} duration={30} />
-      <FloatingBlob color="#FF4500" size={140} bottom="15%" right="-4%" delay={2} duration={26} />
-      <FloatingBlob color="#DC2626" size={110} top="50%" left="-5%" delay={4} duration={28} />
+      {/* Glass blobs in the central vertical area */}
+      <GlassBlob color="#DC2626" size={350} top="35%" left="-8%" delay={0} duration={28} blur={70} opacity={0.18} />
+      <GlassBlob color="#EF4444" size={280} top="45%" right="-6%" delay={2} duration={32} blur={65} opacity={0.15} />
+      <GlassBlob color="#F87171" size={250} top="40%" left="15%" delay={1.5} duration={30} blur={60} opacity={0.12} />
+      <GlassBlob color="#FCA5A5" size={220} top="50%" right="20%" delay={3} duration={26} blur={55} opacity={0.1} />
 
-      <Container>
+      <Container className="relative z-10">
         {/* Tabs */}
         <FadeIn direction="up" delay={0.1}>
           <div className="flex flex-wrap gap-4 justify-center mb-12">

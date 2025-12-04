@@ -5,6 +5,7 @@ export const navContent = {
   links: [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
+    { label: 'For Companies', href: '/companies' },
     { label: 'Offices', href: '/#offices' },
     { label: 'Consultation', href: '/#consultation' },
   ],

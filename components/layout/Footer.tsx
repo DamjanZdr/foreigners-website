@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { theme } from '@/lib/theme';
 import { SocialIcon } from '@/components/ui/icons';
+import Logo from '@/components/ui/Logo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ export default function Footer() {
     { href: '/blog', label: 'Blog' },
     { href: '/news', label: 'News' },
     { href: '/privacy-policy', label: 'Privacy Policy' },
-    { href: '/terms', label: 'Terms and Conditions of Service' },
+    { href: '/terms-of-service', label: 'Terms and Conditions of Service' },
     { href: '/faq', label: 'FAQ' },
     { href: '/documents', label: 'Documents' },
   ];
@@ -66,6 +67,13 @@ export default function Footer() {
   return (
     <footer className="bg-gray-100">
       <div className={`${theme.spacing.container} py-12 md:py-16`}>
+        {/* Logo Section */}
+        <div className="flex justify-center mb-12">
+          <Link href="/">
+            <Logo width={200} height={45} className="hover:opacity-80 transition-opacity" />
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
           {/* Service Links */}
           <div>

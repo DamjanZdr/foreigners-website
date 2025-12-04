@@ -6,6 +6,7 @@ import { theme } from '@/lib/theme';
 import { Button } from '@/components/ui/buttons';
 import { useMobileMenu, useScrollPosition } from '@/hooks';
 import { navContent } from '@/lib/content';
+import Logo from '@/components/ui/Logo';
 
 export default function Navbar() {
   const { isOpen, toggle, close } = useMobileMenu();
@@ -40,11 +41,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <div className={`w-8 h-8 bg-primary ${theme.radius.full} flex items-center justify-center text-white ${theme.fontWeight.bold} ${theme.fontSize.sm}`}>
-                F
-              </div>
-              <span className={`${theme.fontSize.xl} ${theme.fontWeight.bold} text-gray-800`}>FOREIGNERS.pl</span>
+            <Link href="/" className="flex items-center">
+              <Logo width={220} height={50} className="hover:opacity-80 transition-opacity" />
             </Link>
           </div>
 

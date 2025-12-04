@@ -22,7 +22,9 @@ export default function TrustSection({ heading, subheading, description, stats }
           {/* Heading */}
           <FadeIn direction="up" delay={0.1}>
             <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} text-gray-900 text-center max-w-3xl mx-auto`}>
-              {heading} <span className="text-primary">-</span> {subheading}
+              {heading}
+              <br />
+              {subheading}
             </h2>
           </FadeIn>
 

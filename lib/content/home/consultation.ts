@@ -1,8 +1,8 @@
 ﻿// Consultation Section Content
 
 export const consultationContent = {
-  heading: 'Ready to Start Your Immigration Journey?',
-  description: 'Book a free consultation with our expert team. We respond within 24 hours and provide personalized guidance for your specific situation. Let us help you navigate Polish immigration law with confidence.',
+  heading: 'Free Chat Consultation',
+  description: 'Have a free consultation and figure out exactly what you need, how the process works, and how much it costs. We don\'t keep our customers waiting - get your free consultation in less than an hour.',
   form: {
     fullNameLabel: 'Full Name',
     fullNamePlaceholder: 'Enter your full name',

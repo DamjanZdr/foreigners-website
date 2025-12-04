@@ -3,18 +3,20 @@
 export const languageContent = {
   hero: {
     title: 'Language',
-    subtitle: 'Communicate effectively in Polish',
-    description: 'Need Polish language courses or professional translation services? Fill out the form and our specialists will be in touch with you as soon as possible.',
+    subtitle: 'Be understood - in offices, shops and life',
+    description: 'Need help with sworn translations, remote assistance, or court interpretation? Fill out the form and our specialists will be in touch with you as soon as possible.',
     ctaButton: 'Our Services',
+    formTitle: 'Language Consultation',
+    formSource: 'language-service',
   },
   trust: {
-    heading: 'Your case is unique? - Let us know.',
+    heading: 'Your case is unique? Let us know.',
     subheading: 'We will tailor the service for you.',
-    description: "Learning Polish or getting your documents properly translated is essential for successful integration. Whether you're a complete beginner, preparing for certification exams, or need sworn translations for official documents, we offer personalized solutions. Our experienced instructors and certified translators ensure you get exactly what you need.",
+    description: "Language barriers can turn even simple tasks into major challenges - especially when dealing with official documents or legal situations. Whether you need a sworn translation, interpreter for court, or help during remote appointments, we make sure nothing gets lost in translation. No generic services - we match you with the right support based on your exact needs, language, and situation. Clear, accurate, and fully trusted wherever it matters most.",
     stats: {
       period: '6 months',
-      count: '400+',
-      text: 'foreigners trusted us with their language learning and translation needs',
+      count: '500+',
+      text: 'foreigners trusted us by reaching out with their immigration needs',
     },
   },
   qa: {
@@ -22,36 +24,24 @@ export const languageContent = {
     searchPlaceholder: 'Looking for something?',
     items: [
       {
-        question: 'What language services do you offer?',
-        answer: 'We provide comprehensive language support including Polish courses for all levels (A1-C2), one-on-one tutoring, group classes, exam preparation, sworn document translations, interpretation services, and corporate language training.',
+        question: 'What do our language services include?',
+        answer: 'We don\'t teach languages - but we handle the situations where accurate communication really matters. This includes, but is not limited to: Polish Language Courses, Sworn Translation, Remote Assistance, and Court Interpretation.',
       },
       {
         question: 'Polish Language Courses',
-        answer: 'Learn Polish from beginner to advanced levels with our structured courses. We offer flexible scheduling with morning, afternoon, and evening classes, experienced native teachers, and programs tailored to your goals - whether for daily communication, work, or citizenship requirements. Classes available online or in-person.',
+        answer: 'Learning Polish can be challenging, especially when navigating everyday life, work, or official matters in Poland.\n\nOur Polish Language Courses are designed specifically for foreigners living in Poland who need practical, real-life communication skills—not just textbook theory. We offer structured programs from A0 (complete beginner) to B1, taught by qualified teachers experienced in working with international students. Whether you want to improve your daily conversation, prepare for work, or build a solid foundation for long-term life in Poland, our courses guide you step by step.',
       },
       {
-        question: 'Individual Polish Tutoring',
-        answer: 'One-on-one lessons designed specifically for you. Perfect if you need flexible timing, want to focus on specific areas (business Polish, medical terminology, legal language), or prefer learning at your own pace. We match you with tutors who understand your industry and learning style.',
+        question: 'Sworn Translation',
+        answer: 'Sworn translations (tłumaczenia przysięgłe) are legally certified translations required for official documents in Poland - such as birth certificates, diplomas, court documents, contracts, or immigration paperwork. They can only be done by translators registered with the Ministry of Justice.\n\nWe work with certified sworn translators in multiple languages and handle the entire process for you. Just send us your document (scan or original), and we\'ll return a legally valid translation accepted by courts, offices, and institutions across Poland.',
       },
       {
-        question: 'Group Polish Classes',
-        answer: 'Join our small group classes (4-8 students) for interactive learning with peers at similar levels. Group learning provides conversation practice, cultural insights, and a supportive environment. We organize groups by level and availability, with new groups starting monthly.',
+        question: 'Remote Assistance',
+        answer: 'Sometimes you just need help understanding a form, letter, or office conversation - especially when it\'s in Polish and full of official jargon. Remote language assistance is perfect for online meetings, phone calls, or translating informal documents quickly.\n\nWe provide live help via phone, chat, or video. Whether it\'s reading a document with you, translating an email, or guiding you through a Polish website, we\'re there to assist in real time - so you never feel lost or stuck because of the language.',
       },
       {
-        question: 'Polish Exam Preparation',
-        answer: 'Preparing for official Polish language certification? We offer specialized courses for the State Certificate Exam (Certyfikat Znajomości Języka Polskiego) at all levels, required for permanent residence, citizenship, or university admission. Includes practice tests and exam strategies.',
-      },
-      {
-        question: 'Sworn Translation Services',
-        answer: 'Official sworn translations of documents accepted by all Polish authorities - including birth certificates, marriage certificates, diplomas, transcripts, contracts, court documents, and medical records. Our certified translators ensure accuracy and legal validity.',
-      },
-      {
-        question: 'Standard Document Translation',
-        answer: 'Professional translation of business documents, correspondence, websites, marketing materials, and personal documents. Available in multiple language pairs with Polish, delivered quickly and accurately.',
-      },
-      {
-        question: 'Corporate Language Training',
-        answer: 'Polish language programs designed for companies relocating employees to Poland or hiring international staff. We offer on-site training, business Polish courses, and customized programs matching your industry needs.',
+        question: 'Court Interpretation',
+        answer: 'In legal settings like court hearings, police interviews, or notary appointments, having a qualified interpreter is not just helpful - it\'s often legally required. The stakes are high, and every word matters.\n\nWe arrange professional court-certified interpreters who understand legal terminology and know how to navigate formal procedures. We handle scheduling and coordination, so you can focus on your case, knowing the communication is fully covered.',
       },
     ],
   },

@@ -3,19 +3,28 @@
 import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/buttons';
-import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, FloatingBlob } from '@/components/ui/animated';
+import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, GlassBlob } from '@/components/ui/animated';
 import { theme } from '@/lib/theme';
 import { heroContent } from '@/lib/content';
 
 export default function HeroSection() {
   return (
-    <Section className="relative overflow-hidden">
-      {/* Floating Blobs - positioned to bleed around red elements */}
-      <FloatingBlob color={theme.colors.primary} size={200} top="35%" left="-5%" delay={0} />
-      <FloatingBlob color="#FF4500" size={150} top="25%" left="2%" delay={2} duration={25} />
-      <FloatingBlob color="#FF8C00" size={120} bottom="5%" right="-5%" delay={4} duration={18} />
+    <Section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-red-50/30">
+      {/* Glass Blobs - Apple-inspired glassmorphism effect */}
+      <GlassBlob color="#DC2626" size={550} top="12%" left="-12%" delay={0} duration={25} blur={35} opacity={0.5} />
+      <GlassBlob color="#EF4444" size={450} top="3%" left="8%" delay={2} duration={30} blur={30} opacity={0.45} />
+      <GlassBlob color="#F87171" size={380} top="30%" right="3%" delay={1} duration={28} blur={28} opacity={0.42} />
+      <GlassBlob color="#DC2626" size={480} bottom="3%" right="-10%" delay={4} duration={22} blur={32} opacity={0.48} />
+      <GlassBlob color="#FCA5A5" size={320} bottom="22%" left="10%" delay={3} duration={26} blur={25} opacity={0.38} />
+      
+      {/* Additional subtle accent blobs */}
+      <GlassBlob color="#FF6B6B" size={280} top="52%" left="32%" delay={5} duration={24} blur={24} opacity={0.35} />
+      <GlassBlob color="#EF4444" size={350} top="10%" right="22%" delay={2.5} duration={27} blur={28} opacity={0.4} />
 
-      <Container>
+      {/* Gradient fade to white at bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[5]" />
+
+      <Container className="relative z-10">
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="space-y-6">
@@ -41,7 +50,14 @@ export default function HeroSection() {
             {/* CTA Buttons */}
             <FadeIn direction="up" delay={0.4}>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button variant="primary" size="lg">
+                <Button 
+                  variant="primary" 
+                  size="lg"
+                  onClick={() => {
+                    const consultationSection = document.querySelector('#consultation');
+                    consultationSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
                   {heroContent.buttons.primary}
                 </Button>
                 <Button variant="secondary" size="lg">
@@ -78,8 +94,12 @@ export default function HeroSection() {
           <SlideIn direction="right" delay={0.3} duration={0.8}>
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-md">
+                {/* Glass layers behind the card for depth */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 to-red-50/20 rounded-xl blur-3xl transform scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-tl from-red-50/30 to-transparent rounded-xl blur-2xl transform scale-105 translate-x-4 translate-y-4" />
+                
                 <ScaleIn delay={0.5}>
-                  <div className={`bg-white ${theme.radius.xl} ${theme.shadow['2xl']} p-8 border border-gray-100 transform hover:scale-105 ${theme.transition.transform}`}>
+                  <div className={`relative bg-white/80 backdrop-blur-xl ${theme.radius.xl} ${theme.shadow['2xl']} p-8 border border-white/20 transform hover:scale-105 ${theme.transition.transform}`}>
                     {/* Card Header */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className={`w-16 h-16 ${theme.radius.lg} bg-primary flex items-center justify-center`}>

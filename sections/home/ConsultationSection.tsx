@@ -17,12 +17,15 @@ export default function ConsultationSection() {
       <FloatingBlob color="#FF4500" size={160} top="10%" left="2%" delay={1} duration={30} />
       <FloatingBlob color="#DC2626" size={140} bottom="-5%" right="-6%" delay={3} duration={28} />
 
-      <Container>
+      {/* Full-width red strip */}
+      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-80 bg-primary z-0" />
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text */}
           <FadeIn direction="left" delay={0.1}>
             <div className="lg:pr-12">
-              <div className={`bg-primary text-white p-12 ${theme.radius.xl} ${theme.shadow['2xl']} backdrop-blur-sm`}>
+              <div className="text-white py-12">
                 <h2 className={`${theme.fontSize['3xl']} md:${theme.fontSize['4xl']} ${theme.fontWeight.bold} mb-6`}>
                   {consultationContent.heading}
                 </h2>
@@ -35,7 +38,10 @@ export default function ConsultationSection() {
 
           {/* Right Column - Form Card */}
           <ScaleIn delay={0.3}>
-            <LeadForm title="Start now, pay in installments" />
+            <LeadForm 
+              title="General Consultation" 
+              source="home-consultation"
+            />
           </ScaleIn>
         </div>
       </Container>

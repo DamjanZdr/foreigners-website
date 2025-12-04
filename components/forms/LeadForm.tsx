@@ -5,12 +5,17 @@ import { Card } from '@/components/ui/cards';
 import { Input, Select, Checkbox } from '@/components/ui/inputs';
 import { Button } from '@/components/ui/buttons';
 import { theme } from '@/lib/theme';
+import { collectTrackingData } from '@/lib/utils/tracking';
 
 interface LeadFormProps {
   title?: string;
+  source?: string;
 }
 
-export default function LeadForm({ title = 'Start now, pay in installments' }: LeadFormProps) {
+export default function LeadForm({ 
+  title = 'Start now, pay in installments',
+  source = 'unknown'
+}: LeadFormProps) {
   const [formData, setFormData] = useState({
     fullName: '',
     contactNumber: '',
@@ -19,30 +24,83 @@ export default function LeadForm({ title = 'Start now, pay in installments' }: L
     acceptedTerms: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      // Collect tracking data
+      const trackingData = collectTrackingData();
+
+      // Prepare submission data
+      const submissionData = {
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.contactNumber,
+        contact_method: formData.contactMethod,
+        source: source,
+        privacy_accepted: formData.acceptedTerms,
+        tracking: trackingData,
+      };
+
+      // Submit to API
+      const response = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      // Success
+      setSubmitStatus('success');
+      setFormData({
+        fullName: '',
+        contactNumber: '',
+        email: '',
+        contactMethod: '',
+        acceptedTerms: false,
+      });
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactMethods = [
-    { value: 'phone', label: 'Phone Call' },
+    { value: 'call', label: 'Phone Call' },
     { value: 'whatsapp', label: 'WhatsApp' },
     { value: 'email', label: 'Email' },
-    { value: 'video', label: 'Video Call' },
   ];
 
   return (
-    <div className="relative">
-      <Card padding="lg">
+    <div className="relative max-w-md mx-auto">
+      <Card padding="md">
         {title && (
-          <div className="mb-6">
-            <h3 className={`${theme.fontSize.xl} ${theme.fontWeight.bold} text-gray-900 mb-2`}>
+          <div className="mb-4">
+            <h3 className={`${theme.fontSize.lg} ${theme.fontWeight.bold} text-gray-900`}>
               {title}
             </h3>
           </div>
         )}
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             id="fullName"
             label="Full Name"
@@ -57,20 +115,20 @@ export default function LeadForm({ title = 'Start now, pay in installments' }: L
               Contact Number*
             </label>
             <div className="flex gap-2">
-              <div className={`w-20 px-3 py-3 ${theme.radius.md} border border-gray-300 bg-gray-50 flex items-center justify-center`}>
-                <span className={`${theme.fontSize.sm} ${theme.fontWeight.medium}`}> +48</span>
+              <div className={`w-16 px-2 py-2 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm flex items-center justify-center`}>
+                <span className={`${theme.fontSize.xs} ${theme.fontWeight.medium}`}> +48</span>
               </div>
               <input
                 type="tel"
                 id="contactNumber"
                 required
-                className={`flex-1 px-4 py-3 ${theme.radius.md} border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
+                className={`flex-1 px-3 py-2 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
                 placeholder="123 456 789"
                 value={formData.contactNumber}
                 onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
               />
             </div>
-            <p className={`mt-2 ${theme.fontSize.xs} text-primary`}>
+            <p className={`mt-1 ${theme.fontSize.xs} text-primary`}>
               This number has to be available on WhatsApp
             </p>
           </div>
@@ -114,11 +172,33 @@ export default function LeadForm({ title = 'Start now, pay in installments' }: L
             }
           />
 
-          <Button type="submit" variant="primary" size="lg" className="w-full">
-            Submit
+          {submitStatus === 'success' && (
+            <div className={`p-3 ${theme.radius.md} bg-green-50 border border-green-200`}>
+              <p className={`${theme.fontSize.sm} text-green-800 ${theme.fontWeight.semibold}`}>
+                ✓ Thank you! We'll contact you soon.
+              </p>
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className={`p-3 ${theme.radius.md} bg-red-50 border border-red-200`}>
+              <p className={`${theme.fontSize.sm} text-red-800 ${theme.fontWeight.semibold}`}>
+                ✗ {errorMessage || 'Something went wrong. Please try again.'}
+              </p>
+            </div>
+          )}
+
+          <Button 
+            type="submit" 
+            variant="primary" 
+            size="md" 
+            className="w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </Button>
           
-          <p className={`text-center ${theme.fontSize.sm} text-gray-900`}>
+          <p className={`text-center ${theme.fontSize.xs} text-gray-600`}>
             for a Free Consultation
           </p>
         </form>

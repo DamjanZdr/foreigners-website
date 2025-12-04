@@ -77,11 +77,15 @@ export default function QASection({ title, searchPlaceholder, items }: QASection
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  {openIndex === index && (
-                    <div className={`pb-4 ${theme.fontSize.base} text-gray-600 leading-relaxed`}>
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className={`pb-4 ${theme.fontSize.base} text-gray-600 leading-relaxed whitespace-pre-line`}>
                       {item.answer}
                     </div>
-                  )}
+                  </div>
                 </div>
               </FadeIn>
             ))}

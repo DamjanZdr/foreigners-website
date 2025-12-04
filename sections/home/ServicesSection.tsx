@@ -54,7 +54,12 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {servicesContent.items.map((service, index) => (
-            <FadeIn key={index} direction="up" delay={0.2 + index * 0.1}>
+            <FadeIn 
+              key={index} 
+              direction="up" 
+              delay={0.2 + index * 0.1}
+              className={service.title === 'Studies' ? 'md:col-span-2 md:w-1/2 md:mx-auto' : ''}
+            >
               <ServiceCard
                 icon={serviceIcons[service.title]}
                 title={service.title}

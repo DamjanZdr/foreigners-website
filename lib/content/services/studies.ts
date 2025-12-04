@@ -3,18 +3,20 @@
 export const studiesContent = {
   hero: {
     title: 'Studies',
-    subtitle: 'Navigate your educational journey',
-    description: 'Need help with university admissions, student visas, or academic guidance? Fill out the form and our specialists will be in touch with you as soon as possible.',
+    subtitle: 'Keep your mind on classes - we manage immigration',
+    description: 'We help international students apply to Polish universities, secure visas and settle in with all required documentation handled for you.',
     ctaButton: 'Our Services',
+    formTitle: 'Studies Consultation',
+    formSource: 'studies-service',
   },
   trust: {
-    heading: 'Your case is unique? - Let us know.',
-    subheading: 'We will tailor the service for you.',
-    description: "Applying to Polish universities involves understanding admission requirements, preparing documents, and navigating visa processes. Whether you're applying for undergraduate, graduate, or doctoral programs, we guide you through every step. From choosing the right university to securing your student visa, we make your academic journey smooth.",
+    heading: 'Your plans are unique? Tell us.',
+    subheading: 'We\'ll tailor the process for you.',
+    description: "Every university and visa case is different - and that's only the beginning. Your chosen program, application deadlines, visa type, and the country you're coming from all affect the steps you need to take. Whether it's securing admission, gathering documents, or applying for your student visa, we don't offer one-size-fits-all advice. We take the time to understand your full situation and guide you through the right process - clearly, personally, and with zero guesswork.",
     stats: {
       period: '6 months',
-      count: '250+',
-      text: 'students trusted us with their university applications and study permits',
+      count: '500+',
+      text: 'foreigners trusted us by reaching out with their immigration needs',
     },
   },
   qa: {
@@ -22,36 +24,20 @@ export const studiesContent = {
     searchPlaceholder: 'Looking for something?',
     items: [
       {
-        question: 'What study-related services do you offer?',
-        answer: 'We provide complete support for international students including university admissions assistance, student visa applications, document preparation and apostille, scholarship guidance, accommodation help, residence permit applications, and ongoing student support throughout your studies.',
+        question: 'How do we assist students that want to study in Poland?',
+        answer: 'We take you from idea to arrival in three simple steps.\n\nFirst is university admission: we help you pick the right programs, explain requirements and deadlines, collect your documents, prepare and submit applications, and stay in touch with the university until a decision is issued. If your diploma needs official recognition (NAVA/nostrification), we prepare that filing and track it for you.\n\nSecond is visa and entry: if a visa is required, we choose the correct type, complete the forms, book your consulate visit, get you ready for the interview, and provide the proofs you\'ll need (like accommodation and insurance). If you can enter without a visa, we prepare the documents you\'ll need for legal stay.\n\nThird is settling in Poland: after you land, we handle your PESEL application and file your Temporary Residence Card (TRC) on a student basis, guiding you through any follow-ups until it\'s done. All along the way you get clear instructions, document checklists, and status updates, so you can stay focused on studying while we handle the formalities.',
       },
       {
-        question: 'University Admissions Assistance',
-        answer: 'We help you navigate the Polish university application process from start to finish - identifying suitable programs and universities based on your goals, understanding admission requirements and deadlines, preparing application documents, translating and legalizing certificates, and submitting applications. We work with major universities across Poland.',
+        question: 'Stage 1 - University Admission',
+        answer: 'While you are still abroad, we handle two main areas: University Application and Nava (Nostrification) if needed.\n\nFor University Application, we research suitable universities and programs that fit your background and goals, explain entrance requirements and deadlines for each program, help collect and organize all required documents (diplomas, transcripts, references, etc.), prepare and polish your application package including forms and any required statements, submit applications on your behalf and monitor progress, and facilitate communication with the university until you receive an admission decision.\n\nFor Nava – Nostrification (optional), we validate foreign diplomas or certificates so they are officially recognized in Poland, handle the paperwork and submission to the appropriate Polish authority, and follow up on the process until completion, which can take up to 60 days.',
       },
       {
-        question: 'Student Visa Applications',
-        answer: 'Complete support for obtaining a Polish student visa (type D). We help you prepare all required documents, book and prepare for your consulate appointment, follow up on application status, and reapply if necessary. Our experience with student visas ensures your application is complete and properly submitted.',
+        question: 'Stage 2 - Visa & Entry',
+        answer: 'This stage only required if you don\'t already have a green passport or other legal means to enter and stay in Poland.\n\nFor Visa Arrangement, we identify the correct visa type for your situation and chosen university, provide a checklist of documents (acceptance letter, financial proof, health insurance, etc.), assist in filling out the visa application and booking your consular appointment, and support you with interview preparation and tracking the application status.\n\nFor Proof of Accommodation, we prepare and supply the official accommodation documents demanded by the Polish authorities.',
       },
       {
-        question: 'Document Preparation and Legalization',
-        answer: 'All documents for Polish universities must be properly translated and legalized. We arrange sworn translations of diplomas, transcripts, certificates, and supporting documents, obtain apostilles or embassy legalization as required, and ensure everything meets university requirements.',
-      },
-      {
-        question: 'Student Residence Permit',
-        answer: 'After arriving in Poland on a student visa, you need a temporary residence permit for studies. We help prepare your application, gather required documents including proof of accommodation and health insurance, submit to the voivodeship office, and follow up until you receive your residence card.',
-      },
-      {
-        question: 'Scholarship and Funding Guidance',
-        answer: 'Learn about scholarship opportunities for international students - including Polish government scholarships, Erasmus+ programs, university-specific grants, and other funding sources. We help you understand eligibility criteria, prepare applications, and maximize your chances of receiving financial support.',
-      },
-      {
-        question: 'Accommodation Assistance',
-        answer: 'Finding suitable student accommodation can be challenging. We help you explore options including university dormitories, private student housing, and shared apartments. We can also assist with rental agreements and ensuring your accommodation meets residence permit requirements.',
-      },
-      {
-        question: 'Nostrification of Foreign Diplomas',
-        answer: 'If you want to continue education in Poland or need your foreign diploma recognized, we guide you through the nostrification process - determining the correct procedure for your specific case, preparing documents, and submitting to the appropriate educational authority.',
+        question: 'Stage 3 - Settling in Poland',
+        answer: 'Once you have arrived, we handle two key processes: PESEL and TRC (Temporary Residence Card).\n\nFor PESEL, we prepare the application for your national identification number and submit the request at the local municipal office and guide you through any follow-up.\n\nFor TRC – Temporary Residence Card, we explain all requirements for the student residence permit, collect and prepare supporting documents (university certificate, financial means, etc.), and file the application and assist you through the process until the card is issued.',
       },
     ],
   },

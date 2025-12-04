@@ -18,7 +18,7 @@ export default function AnimatedTagline() {
           The Only
         </motion.div>
 
-        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+        <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-2">
           {/* "One" - appears 1st */}
           <motion.span
             initial={{ opacity: 0, y: 20 }}
