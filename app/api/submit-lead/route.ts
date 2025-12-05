@@ -7,8 +7,8 @@ interface LeadSubmission {
   // Contact Information
   full_name: string;
   email: string;
-  phone?: string;
-  contact_method?: string;
+  phone: string;
+  contact_method: string;
   source: string;
   privacy_accepted: boolean;
   
@@ -85,8 +85,18 @@ export async function POST(request: NextRequest) {
   try {
     const body: LeadSubmission = await request.json();
     
+    console.log('Received form submission:', body);
+    
     // Validate required fields
     if (!body.full_name || !body.email || !body.phone || !body.contact_method || !body.source || body.privacy_accepted !== true) {
+      console.log('Validation failed:', {
+        full_name: !!body.full_name,
+        email: !!body.email,
+        phone: !!body.phone,
+        contact_method: !!body.contact_method,
+        source: !!body.source,
+        privacy_accepted: body.privacy_accepted
+      });
       return NextResponse.json(
         { error: 'Missing required fields: name, email, phone, contact method, and privacy acceptance are required' },
         { status: 400 }
@@ -141,6 +151,8 @@ export async function POST(request: NextRequest) {
       user_timezone: body.tracking?.user_timezone || null,
     };
     
+    console.log('Inserting data into Supabase:', leadData);
+    
     // Insert into Supabase
     const { data, error } = await supabase
       .from('lead_submissions')
@@ -154,6 +166,8 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+    
+    console.log('Successfully inserted:', data);
     
     return NextResponse.json(
       { success: true, data },
