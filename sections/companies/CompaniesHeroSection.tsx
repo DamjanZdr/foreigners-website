@@ -24,7 +24,7 @@ export default function CompaniesHeroSection() {
       {/* Gradient fade to white at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[5]" />
       
-      <Container>
+      <Container className="relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           <FadeIn>
             <h1 className={`${theme.fontSize['5xl']} md:${theme.fontSize['6xl']} ${theme.fontWeight.bold} text-gray-900 mb-4`}>

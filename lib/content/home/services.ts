@@ -25,7 +25,7 @@ export const servicesContent = {
       title: 'Business',
       subtitle: 'Start and grow your business in Poland',
       description: 'Company registration, tax setup, accounting services, and business consulting. We guide you through Polish business regulations and help you succeed.',
-      link: '/companies',
+      link: '/services/business',
     },
     {
       title: 'Studies',

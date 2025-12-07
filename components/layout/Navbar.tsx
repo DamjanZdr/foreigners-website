@@ -127,7 +127,7 @@ export default function Navbar() {
               {/* Menu Items */}
               <div className="flex-1 overflow-y-auto p-4">
                 <nav className="space-y-2">
-                  {navContent.links.map((link) => (
+                  {navContent.mobileLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}

@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
                 <div className="flex gap-3 flex-shrink-0">
                   <a
                     href={termsOfServiceContent.pdfUrlEn}
-                    download
+                    download="Terms-of-Service-English.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                     aria-label="Download Terms of Service PDF (English)"
                   >
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
                   </a>
                   <a
                     href={termsOfServiceContent.pdfUrlPl}
-                    download
+                    download="Regulamin-Swiadczenia-Uslug-Polski.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                     aria-label="Download Terms of Service PDF (Polish)"
                   >

@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
                 <div className="flex gap-3 flex-shrink-0">
                   <a
                     href="/privacy-policy-en.pdf"
-                    download
+                    download="Privacy-Policy-English.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                     aria-label="Download Privacy Policy PDF (English)"
                   >
@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
                   </a>
                   <a
                     href="/privacy-policy-pl.pdf"
-                    download
+                    download="Polityka-Prywatnosci-Polski.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                     aria-label="Download Privacy Policy PDF (Polish)"
                   >

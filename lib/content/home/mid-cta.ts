@@ -3,5 +3,5 @@
 export const midCtaContent = {
   heading: 'Looking to hire international talent?',
   buttonText: 'For Companies',
-  buttonLink: '/for-companies',
+  buttonLink: '/companies',
 } as const;

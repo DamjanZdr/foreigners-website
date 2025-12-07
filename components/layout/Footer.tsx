@@ -89,7 +89,7 @@ export default function Footer() {
           </div>
 
           {/* Useful Links */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className={`${theme.fontSize.lg} ${theme.fontWeight.bold} text-gray-900 mb-4`}>Useful Links</h3>
             <ul className="space-y-3">
               {usefulLinks.map((link) => (
