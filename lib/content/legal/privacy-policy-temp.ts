@@ -26,3 +26,7 @@ export const privacyPolicyContent = {
           { term: 'RODO', definition: 'Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony danych osobowych.' },
         ],
       },
+    ],
+  },
+};
+      },
