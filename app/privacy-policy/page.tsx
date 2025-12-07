@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
                     href="/privacy-policy-pl.pdf"
                     download="Polityka-Prywatnosci.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                    aria-label="Download Privacy Policy PDF (Polish)"
+                    aria-label="Pobierz PDF Polityki Prywatności (Polski)"
                   >
                     <svg
                       className="w-5 h-5"
