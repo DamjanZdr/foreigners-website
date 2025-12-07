@@ -19,13 +19,14 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
   cleanContent = cleanContent.replace(/\\n\\n/g, '\n\n');
   cleanContent = cleanContent.replace(/\\n/g, '\n');
   
-  // Add bold formatting to step labels (Step 1:, Step 2:, etc.)
-  cleanContent = cleanContent.replace(/^(Step \d+:[^:\n]+)$/gm, '**$1**');
-  
   // Ensure double newlines for proper Markdown rendering
   cleanContent = cleanContent.replace(/\n(##+ )/g, '\n\n$1'); // Add space before headings (##, ###, etc)
   cleanContent = cleanContent.replace(/(##[^\n]+)\n(?!##|\n)/g, '$1\n\n'); // Add space after headings
   cleanContent = cleanContent.replace(/([.!?:])\n([A-Z][a-z]{3,})/g, '$1\n\n$2'); // Add space between sentences (at least 4 letters after capital)
+  
+  // Add bold formatting to step labels and keep them with their description
+  cleanContent = cleanContent.replace(/\n\n(Step \d+: [^\n]+)\n([A-Z])/g, '\n\n**$1**\n\n$2');
+  
   cleanContent = cleanContent.replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines
 
   return (
