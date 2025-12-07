@@ -11,15 +11,15 @@ import { theme } from '@/lib/theme';
 export default function CompaniesHeroSection() {
   return (
     <Section className="relative bg-gradient-to-br from-gray-50 via-white to-red-50/30 overflow-hidden pt-24 pb-16">
-      {/* Glass Blobs */}
-      <GlassBlob color="#fdeee7" size={480} top="8%" left="-8%" delay={0} duration={27} blur={12} opacity={0.43} />
-      <GlassBlob color="#fce4d6" size={420} top="15%" right="-5%" delay={1.5} duration={31} blur={10} opacity={0.41} />
-      <GlassBlob color="#fdd5c4" size={350} bottom="10%" right="5%" delay={3} duration={25} blur={8} opacity={0.39} />
-      <GlassBlob color="#fcc9b3" size={300} bottom="20%" left="8%" delay={2} duration={28} blur={8} opacity={0.37} />
+      {/* Glass Blobs - More subtle and glassy */}
+      <GlassBlob color="#fdeee7" size={480} top="8%" left="-8%" delay={0} duration={27} blur={20} opacity={0.25} />
+      <GlassBlob color="#fce4d6" size={420} top="15%" right="-5%" delay={1.5} duration={31} blur={18} opacity={0.22} />
+      <GlassBlob color="#fdd5c4" size={350} bottom="10%" right="5%" delay={3} duration={25} blur={16} opacity={0.20} />
+      <GlassBlob color="#fcc9b3" size={300} bottom="20%" left="8%" delay={2} duration={28} blur={16} opacity={0.18} />
       
       {/* Additional accent blobs */}
-      <GlassBlob color="#fbd4c0" size={220} top="50%" left="30%" delay={4} duration={24} blur={7} opacity={0.34} />
-      <GlassBlob color="#fdeee7" size={180} bottom="35%" right="28%" delay={3.5} duration={26} blur={6} opacity={0.32} />
+      <GlassBlob color="#fbd4c0" size={220} top="50%" left="30%" delay={4} duration={24} blur={14} opacity={0.15} />
+      <GlassBlob color="#fdeee7" size={180} bottom="35%" right="28%" delay={3.5} duration={26} blur={12} opacity={0.12} />
       
       {/* Gradient fade to white at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[5]" />
