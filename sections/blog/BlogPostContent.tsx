@@ -81,7 +81,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
       <div className="prose prose-lg max-w-none blog-content">
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw, rehypeSanitize]}
+          rehypePlugins={[rehypeRaw]}
           disallowedElements={['h1']}
           unwrapDisallowed={true}
           components={{

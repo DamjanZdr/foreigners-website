@@ -1,7 +1,11 @@
--- Fix escaped newlines and formatting in all blog posts
--- This converts escaped newline characters (\\n) to actual newlines
--- Run this in Supabase SQL Editor to fix the formatting
+-- Fix blog post formatting: convert step headings to bold text
+-- Changes "### Step 1: Title" to "**Step 1: Title**"
+-- Run this in Supabase SQL Editor
 
 UPDATE blog_posts
-SET content = REPLACE(REPLACE(content, E'\\\\n', E'\n'), '\n\n\n', '\n\n')
-WHERE content LIKE '%\\n%';
+SET content = REGEXP_REPLACE(
+  content, 
+  '###\s*(Step \d+: [^\n]+)',
+  '**\1**',
+  'g'
+);
