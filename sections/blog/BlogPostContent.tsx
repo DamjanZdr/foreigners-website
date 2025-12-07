@@ -19,6 +19,9 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
   cleanContent = cleanContent.replace(/\\n\\n/g, '\n\n');
   cleanContent = cleanContent.replace(/\\n/g, '\n');
   
+  // Add bold formatting to step labels (Step 1:, Step 2:, etc.)
+  cleanContent = cleanContent.replace(/^(Step \d+:[^:\n]+)$/gm, '**$1**');
+  
   // Ensure double newlines for proper Markdown rendering
   cleanContent = cleanContent.replace(/\n(##+ )/g, '\n\n$1'); // Add space before headings (##, ###, etc)
   cleanContent = cleanContent.replace(/(##[^\n]+)\n(?!##|\n)/g, '$1\n\n'); // Add space after headings
@@ -82,6 +85,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             p: ({ children }) => <p className="mb-5 mt-0">{children}</p>,
             h2: ({ children }) => <h2 className="text-xl font-bold mt-8 mb-0 leading-tight">{children}</h2>,
             h3: ({ children }) => <h3 className="text-lg font-bold mt-6 mb-0 leading-tight">{children}</h3>,
+            strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
             ul: ({ children }) => <ul className="list-disc pl-6 mb-5 space-y-2">{children}</ul>,
             ol: ({ children }) => <ol className="list-decimal pl-6 mb-5 space-y-2">{children}</ol>,
             li: ({ children }) => <li className="text-gray-700">{children}</li>,
