@@ -82,6 +82,8 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw, rehypeSanitize]}
+          disallowedElements={['h1']}
+          unwrapDisallowed={true}
           components={{
             p: ({ children }) => <p className="mb-5 mt-0">{children}</p>,
             h2: ({ children }) => <h2 className="text-xl font-bold mt-8 mb-0 leading-tight">{children}</h2>,
