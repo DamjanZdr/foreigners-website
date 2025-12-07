@@ -12,22 +12,12 @@ interface BlogPostContentProps {
 }
 
 export default function BlogPostContent({ post }: BlogPostContentProps) {
-  // Convert literal \n sequences to actual newlines and ensure proper paragraph spacing
+  // Convert literal \n sequences to actual newlines
   let cleanContent = post.content;
   
   // Handle escaped newlines in various forms
   cleanContent = cleanContent.replace(/\\n\\n/g, '\n\n');
   cleanContent = cleanContent.replace(/\\n/g, '\n');
-  
-  // Ensure double newlines for proper Markdown rendering
-  cleanContent = cleanContent.replace(/\n(##+ )/g, '\n\n$1'); // Add space before headings (##, ###, etc)
-  cleanContent = cleanContent.replace(/(##[^\n]+)\n(?!##|\n)/g, '$1\n\n'); // Add space after headings
-  cleanContent = cleanContent.replace(/([.!?:])\n([A-Z][a-z]{3,})/g, '$1\n\n$2'); // Add space between sentences (at least 4 letters after capital)
-  
-  // Add bold formatting to step labels and keep them with their description
-  cleanContent = cleanContent.replace(/\n\n(Step \d+: [^\n]+)\n([A-Z])/g, '\n\n**$1**\n\n$2');
-  
-  cleanContent = cleanContent.replace(/\n{3,}/g, '\n\n'); // Clean up excessive newlines
 
   return (
     <article className="bg-white rounded-lg shadow-sm p-8 md:p-12 mb-8">
@@ -81,14 +71,11 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
       <div className="prose prose-lg max-w-none blog-content">
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
-          disallowedElements={['h1']}
-          unwrapDisallowed={true}
+          rehypePlugins={[rehypeRaw, rehypeSanitize]}
           components={{
             p: ({ children }) => <p className="mb-5 mt-0">{children}</p>,
             h2: ({ children }) => <h2 className="text-xl font-bold mt-8 mb-0 leading-tight">{children}</h2>,
             h3: ({ children }) => <h3 className="text-lg font-bold mt-6 mb-0 leading-tight">{children}</h3>,
-            strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
             ul: ({ children }) => <ul className="list-disc pl-6 mb-5 space-y-2">{children}</ul>,
             ol: ({ children }) => <ol className="list-decimal pl-6 mb-5 space-y-2">{children}</ol>,
             li: ({ children }) => <li className="text-gray-700">{children}</li>,
