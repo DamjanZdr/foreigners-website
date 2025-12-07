@@ -13,7 +13,7 @@ export default function ServicesSection() {
         <SectionHeading
           title={companiesContent.services.title}
           subtitle={companiesContent.services.subtitle}
-          centered
+          align="center"
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

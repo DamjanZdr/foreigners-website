@@ -12,7 +12,7 @@ export default function ProcessSection() {
         <SectionHeading
           title={companiesContent.process.title}
           subtitle={companiesContent.process.subtitle}
-          centered
+          align="center"
         />
 
         <div className="max-w-4xl mx-auto">

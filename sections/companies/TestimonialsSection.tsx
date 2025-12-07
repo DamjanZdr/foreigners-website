@@ -13,7 +13,7 @@ export default function TestimonialsSection() {
         <SectionHeading
           title="What Business Leaders Say"
           subtitle="Trusted by companies across Poland"
-          centered
+          align="center"
         />
 
         <div className="grid md:grid-cols-3 gap-8">

@@ -12,7 +12,7 @@ export default function CompaniesQASection() {
         <SectionHeading
           title="Frequently Asked Questions"
           subtitle="Everything you need to know about our corporate services"
-          centered
+          align="center"
         />
 
         <div className="max-w-3xl mx-auto space-y-6">
