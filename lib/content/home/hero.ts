@@ -6,7 +6,7 @@ export const heroContent = {
     line2: 'Partner in Poland',
   },
   subtitle: 'Solution for Foreigners',
-  description: 'Professional assistance with work permits, residence cards, business setup, and all aspects of living in Poland. We make your transition smooth and legally compliant.',
+  description: 'Professional assistance for foreigners in Poland. Work permits, residence cards, and legal advice from certified experts.',
   buttons: {
     primary: 'Free Consultation',
     secondary: 'Our Services',

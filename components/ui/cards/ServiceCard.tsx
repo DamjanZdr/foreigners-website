@@ -14,7 +14,7 @@ interface ServiceCardProps {
 export default function ServiceCard({ icon, title, subtitle, description, link }: ServiceCardProps) {
   return (
     <Tilt3D>
-      <Card>
+      <Card glass>
         <IconWrapper variant="outline" size="md" className="mb-6">
           {icon}
         </IconWrapper>

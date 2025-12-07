@@ -37,6 +37,7 @@ export default function LeadForm({
     try {
       // Collect tracking data
       const trackingData = collectTrackingData();
+      console.log('[Form] Collected tracking data:', trackingData);
 
       // Prepare submission data
       const submissionData = {
@@ -48,6 +49,7 @@ export default function LeadForm({
         privacy_accepted: formData.acceptedTerms,
         tracking: trackingData,
       };
+      console.log('[Form] Submitting data:', submissionData);
 
       // Submit to API
       const response = await fetch('/api/submit-lead', {
@@ -57,14 +59,18 @@ export default function LeadForm({
         },
         body: JSON.stringify(submissionData),
       });
+      console.log('[Form] API response status:', response.status);
 
       const data = await response.json();
+      console.log('[Form] API response data:', data);
 
       if (!response.ok) {
+        console.error('[Form] Submission failed:', data);
         throw new Error(data.error || 'Failed to submit form');
       }
 
       // Success
+      console.log('[Form] ✅ Submission successful!');
       setSubmitStatus('success');
       setFormData({
         fullName: '',
@@ -75,7 +81,8 @@ export default function LeadForm({
       });
 
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('[Form] ❌ Submission error:', error);
+      console.error('[Form] Error details:', error instanceof Error ? error.message : 'Unknown error');
       setSubmitStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
     } finally {
@@ -91,7 +98,7 @@ export default function LeadForm({
 
   return (
     <div className="relative max-w-md mx-auto">
-      <Card padding="md">
+      <Card padding="md" glass={false} className="bg-white/95 backdrop-blur-sm">
         {title && (
           <div className="mb-4">
             <h3 className={`${theme.fontSize.lg} ${theme.fontWeight.bold} text-gray-900`}>

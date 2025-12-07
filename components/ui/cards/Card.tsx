@@ -15,7 +15,7 @@ export default function Card({ children, className = '', padding = 'md', glass =
   };
 
   const baseClasses = glass 
-    ? `${theme.glass.card} ${theme.shadow.xl}` 
+    ? `bg-white/50 backdrop-blur-md border border-white/20 ${theme.shadow.xl}` 
     : `bg-white border border-gray-200 ${theme.shadow.md}`;
 
   return (

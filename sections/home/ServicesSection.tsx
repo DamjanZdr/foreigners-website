@@ -37,7 +37,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
 
 export default function ServicesSection() {
   return (
-    <Section id="services" className="relative overflow-hidden">
+    <Section id="services" className="relative overflow-hidden z-10">
       {/* Red blobs positioned around service cards (which have red subtitles and links) */}
       <FloatingBlob color={theme.colors.primary} size={180} top="15%" left="-5%" delay={0} duration={32} />
       <FloatingBlob color="#FF4500" size={150} top="40%" right="-5%" delay={1.5} duration={28} />

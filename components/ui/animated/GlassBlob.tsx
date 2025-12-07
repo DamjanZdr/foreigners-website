@@ -35,16 +35,21 @@ export default function GlassBlob({
     bottom,
     left,
     right,
-    background: `radial-gradient(circle at center, ${color}80 0%, ${color}50 30%, ${color}20 60%, transparent 100%)`,
+    background: `radial-gradient(circle at center, ${color} 0%, ${color}DD 20%, ${color}99 40%, ${color}66 60%, transparent 100%)`,
     borderRadius: '50%',
     filter: `blur(${blur}px)`,
     opacity,
-    animation: `float ${duration}s ease-in-out infinite`,
-    animationDelay: `${delay}s`,
     pointerEvents: 'none',
-    zIndex: 1,
+    zIndex: 0,
     mixBlendMode: 'normal',
   };
 
-  return <div style={style} className="glass-blob" />;
+  return (
+    <div 
+      style={style} 
+      className="glass-blob animate-float"
+      data-delay={delay}
+      data-duration={duration}
+    />
+  );
 }

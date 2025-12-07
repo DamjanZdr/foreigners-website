@@ -9,7 +9,7 @@ import { midCtaContent } from '@/lib/content';
 
 export default function MidCtaSection() {
   return (
-    <Section className="relative overflow-hidden">
+    <Section id="mid-cta-section" className="relative overflow-hidden">
       
       {/* Red blob positioned around CTA button */}
       <FloatingBlob color={theme.colors.primary} size={180} top="30%" left="30%" delay={0} duration={28} />

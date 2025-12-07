@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Section from '@/components/layout/Section';
 import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/buttons';
@@ -7,22 +8,30 @@ import { FadeIn, SlideIn, ScaleIn, AnimatedGradient, GlassBlob } from '@/compone
 import { theme } from '@/lib/theme';
 import { heroContent } from '@/lib/content';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  isJourneyActive: boolean;
+  onJourneyToggle: () => void;
+}
+
+export default function HeroSection({ isJourneyActive, onJourneyToggle }: HeroSectionProps) {
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
+
   return (
     <Section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-red-50/30">
       {/* Glass Blobs - Apple-inspired glassmorphism effect */}
-      <GlassBlob color="#DC2626" size={550} top="12%" left="-12%" delay={0} duration={25} blur={35} opacity={0.5} />
-      <GlassBlob color="#EF4444" size={450} top="3%" left="8%" delay={2} duration={30} blur={30} opacity={0.45} />
-      <GlassBlob color="#F87171" size={380} top="30%" right="3%" delay={1} duration={28} blur={28} opacity={0.42} />
-      <GlassBlob color="#DC2626" size={480} bottom="3%" right="-10%" delay={4} duration={22} blur={32} opacity={0.48} />
-      <GlassBlob color="#FCA5A5" size={320} bottom="22%" left="10%" delay={3} duration={26} blur={25} opacity={0.38} />
-      
-      {/* Additional subtle accent blobs */}
-      <GlassBlob color="#FF6B6B" size={280} top="52%" left="32%" delay={5} duration={24} blur={24} opacity={0.35} />
-      <GlassBlob color="#EF4444" size={350} top="10%" right="22%" delay={2.5} duration={27} blur={28} opacity={0.4} />
+      <div className="opacity-30 md:opacity-100">
+        <GlassBlob color="#fdeee7" size={550} top="12%" left="-12%" delay={0} duration={25} blur={12} opacity={0.7} />
+        <GlassBlob color="#fce4d6" size={450} top="3%" left="8%" delay={2} duration={30} blur={10} opacity={0.65} />
+        <GlassBlob color="#fdd5c4" size={380} top="30%" right="3%" delay={1} duration={28} blur={10} opacity={0.6} />
+        <GlassBlob color="#fdeee7" size={480} bottom="3%" right="-10%" delay={4} duration={22} blur={12} opacity={0.68} />
+        <GlassBlob color="#fcc9b3" size={320} bottom="22%" left="10%" delay={3} duration={26} blur={8} opacity={0.55} />
+        <GlassBlob color="#fbd4c0" size={280} top="52%" left="32%" delay={5} duration={24} blur={8} opacity={0.5} />
+        <GlassBlob color="#fce4d6" size={350} top="10%" right="22%" delay={2.5} duration={27} blur={10} opacity={0.58} />
+        <GlassBlob color="#fdeee7" size={300} top="40%" left="5%" delay={2.2} duration={28} blur={9} opacity={0.6} />
+      </div>
 
       {/* Gradient fade to white at bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-[5]" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white/95 via-white/50 to-transparent pointer-events-none z-0" />
 
       <Container className="relative z-10">
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -83,49 +92,121 @@ export default function HeroSection() {
                     AS
                   </div>
                 </div>
-                <p className={`${theme.fontSize.sm} text-gray-600`}>
-                  <span className={`${theme.fontWeight.bold} text-gray-900`}>{heroContent.socialProof.count}</span> {heroContent.socialProof.text}
-                </p>
+                <div className="text-gray-700">
+                  <p className={`${theme.fontSize.sm} ${theme.fontWeight.semibold}`}>Trusted by 500+ clients</p>
+                </div>
               </div>
             </FadeIn>
           </div>
 
-          {/* Right Column - Floating Card */}
+          {/* Right Column - Floating Card - Hidden on mobile */}
           <SlideIn direction="right" delay={0.3} duration={0.8}>
-            <div className="flex justify-center lg:justify-end">
+            <div className="hidden lg:flex justify-center lg:justify-end">
               <div className="relative w-full max-w-md">
                 {/* Glass layers behind the card for depth */}
                 <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 to-red-50/20 rounded-xl blur-3xl transform scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-tl from-red-50/30 to-transparent rounded-xl blur-2xl transform scale-105 translate-x-4 translate-y-4" />
                 
                 <ScaleIn delay={0.5}>
-                  <div className={`relative bg-white/80 backdrop-blur-xl ${theme.radius.xl} ${theme.shadow['2xl']} p-8 border border-white/20 transform hover:scale-105 ${theme.transition.transform}`}>
-                    {/* Card Header */}
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-16 h-16 ${theme.radius.lg} bg-primary flex items-center justify-center`}>
-                        <span className={`text-white ${theme.fontSize['2xl']} ${theme.fontWeight.bold}`}>ID</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className={`h-3 bg-gray-200 ${theme.radius.full} w-3/4 mb-2`}></div>
-                        <div className={`h-3 bg-gray-200 ${theme.radius.full} w-1/2`}></div>
-                      </div>
-                    </div>
+                  {/* Flip card container */}
+                  <div 
+                    data-journey-card="true"
+                    className="relative h-[450px] cursor-pointer"
+                    style={{ perspective: '1000px' }}
+                    onMouseEnter={() => setIsCardFlipped(true)}
+                    onMouseLeave={() => setIsCardFlipped(false)}
+                  >
+                    <div
+                      className={`relative w-full h-full transition-transform duration-700 ${theme.transition.all}`}
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        transform: isCardFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                      }}
+                    >
+                      {/* Front of card - ID mockup */}
+                      <div
+                        className="absolute inset-0"
+                        style={{ backfaceVisibility: 'hidden' }}
+                      >
+                        <div className={`relative bg-white/80 backdrop-blur-xl ${theme.radius.xl} ${theme.shadow['2xl']} p-8 border border-white/20 transform hover:scale-105 ${theme.transition.transform} h-full`}>
+                          {/* Card Header */}
+                          <div className="flex items-center gap-4 mb-6">
+                            <div className={`w-16 h-16 ${theme.radius.lg} bg-primary flex items-center justify-center`}>
+                              <span className={`text-white ${theme.fontSize['2xl']} ${theme.fontWeight.bold}`}>ID</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className={`h-3 bg-gray-200 ${theme.radius.full} w-3/4 mb-2`}></div>
+                              <div className={`h-3 bg-gray-200 ${theme.radius.full} w-1/2`}></div>
+                            </div>
+                          </div>
 
-                    {/* Card Body - Form Fields */}
-                    <div className="space-y-4 mb-6">
-                      <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
-                      <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
-                      <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
-                      <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
-                    </div>
+                          {/* Card Body - Form Fields */}
+                          <div className="space-y-4 mb-6">
+                            <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
+                            <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
+                            <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
+                            <div className={`h-12 bg-gray-100 ${theme.radius.md}`}></div>
+                          </div>
 
-                    {/* Card Footer */}
-                    <div className="flex items-center justify-between">
-                      <div className={`h-12 bg-primary-light ${theme.radius.md} flex-1 mr-4`}></div>
-                      <div className={`w-12 h-12 ${theme.radius.full} bg-primary flex items-center justify-center`}>
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                          {/* Card Footer */}
+                          <div className="flex items-center justify-between">
+                            <div className={`h-12 bg-primary-light ${theme.radius.md} flex-1 mr-4`}></div>
+                            <div className={`w-12 h-12 ${theme.radius.full} bg-primary flex items-center justify-center`}>
+                              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Back of card - Journey invitation */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          backfaceVisibility: 'hidden',
+                          transform: 'rotateY(180deg)'
+                        }}
+                      >
+                        <div className={`relative bg-gradient-to-br from-primary to-red-800 ${theme.radius.xl} ${theme.shadow['2xl']} p-8 border border-red-700/50 h-full flex flex-col items-center justify-center text-center`}>
+                          {/* Footsteps icon */}
+                          <div className="mb-6">
+                            <svg className="w-16 h-16 text-white/90" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M18 16c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0-8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-6 1c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-6 5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0-8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z" />
+                            </svg>
+                          </div>
+                          
+                          <h3 className={`${theme.fontSize.xl} ${theme.fontWeight.bold} text-white mb-3`}>
+                            This is what the average
+                          </h3>
+                          <h3 className={`${theme.fontSize['2xl']} ${theme.fontWeight.bold} text-white mb-6`}>
+                            TRC Process feels like
+                          </h3>
+
+                          {/* Animated arrow pointing down */}
+                          <div className="mb-4">
+                            <svg 
+                              className="w-8 h-8 text-white/70 animate-bounce" 
+                              fill="none" 
+                              stroke="currentColor" 
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                          </div>
+
+                          {/* Start/Stop Button */}
+                          <button
+                            onClick={onJourneyToggle}
+                            className={`${theme.radius.lg} px-8 py-3 ${theme.fontSize.base} ${theme.fontWeight.semibold} ${theme.transition.all} ${
+                              isJourneyActive
+                                ? 'bg-white text-primary hover:bg-gray-100'
+                                : 'bg-white text-primary hover:bg-gray-100'
+                            }`}
+                          >
+                            {isJourneyActive ? 'Stop' : 'Start'}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

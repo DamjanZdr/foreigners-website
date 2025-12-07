@@ -1,0 +1,60 @@
+'use client';
+
+import { useState } from 'react';
+import { Metadata } from 'next';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import Container from '@/components/layout/Container';
+import Section from '@/components/layout/Section';
+import { theme } from '@/lib/theme';
+
+// FAQ Category data structure
+const faqCategories = [
+  {
+    id: 'overview',
+    title: 'What Can Foreigners.pl Help You With?',
+    description: 'Comprehensive services for foreigners living in Poland',
+    items: [
+      {
+        question: 'What services does Foreigners.pl offer?',
+        answer: `We provide comprehensive support across all aspects of life in Poland for foreigners:
+
+**Immigration Services**
+ Temporary & Permanent Residence Cards
+ Work Permits & EU Blue Cards
+ Visa Arrangements
+ PESEL & Document Legalization
+ Appeals & Legal Consultations
+
+**Driving Services**
+ New Driving License Applications
+ Driving License Conversion
+ Car Registration
+ Parking Permits
+
+**Language Services**
+ Polish Language Courses (A0-B1)
+ Sworn Translations
+ Remote Assistance
+ Court Interpretation
+
+**Business Services**
+ Business Registration
+ Simplified & Full Accounting
+ Payroll and HR Management
+ Additional Business Support
+
+**For Companies**
+ Corporate Immigration Services
+ Work Permits for Employees
+ Compliance Management
+ Employee Relocation Support
+
+**Studies Services**
+ University Admissions
+ Student Visa Applications
+ PESEL & TRC for Students
+ Settlement Support`,
+      },
+    ],
+  },

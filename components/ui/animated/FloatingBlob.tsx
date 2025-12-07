@@ -26,7 +26,7 @@ export function FloatingBlob({
 }: FloatingBlobProps) {
   return (
     <motion.div
-      className="absolute rounded-full blur-3xl opacity-[0.04]"
+      className="absolute rounded-full blur-3xl opacity-[0.04] -z-[1]"
       style={{
         width: size,
         height: size,

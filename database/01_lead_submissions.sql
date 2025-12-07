@@ -69,21 +69,13 @@ CREATE INDEX idx_lead_submissions_device_type ON lead_submissions(device_type);
 CREATE INDEX idx_lead_submissions_referrer_domain ON lead_submissions(referrer_domain);
 CREATE INDEX idx_lead_submissions_utm_source ON lead_submissions(utm_source);
 
--- Remove the update trigger since we don't have updated_at anymore
+-- Grant permissions to anon and authenticated roles
+GRANT ALL ON lead_submissions TO anon;
+GRANT ALL ON lead_submissions TO authenticated;
 
--- Row Level Security (RLS) Policies
-ALTER TABLE lead_submissions ENABLE ROW LEVEL SECURITY;
-
--- Policy: Allow anyone to insert (for form submissions)
-CREATE POLICY "Allow public insert" ON lead_submissions
-  FOR INSERT
-  WITH CHECK (true);
-
--- Policy: Only authenticated users can view (for admin panel)
-CREATE POLICY "Authenticated users can view all" ON lead_submissions
-  FOR SELECT
-  TO authenticated
-  USING (true);
+-- RLS is currently DISABLED for development
+-- Enable and configure RLS policies when moving to production
+ALTER TABLE lead_submissions DISABLE ROW LEVEL SECURITY;
 
 -- Comments for documentation
 COMMENT ON TABLE lead_submissions IS 'Stores all lead form submissions with comprehensive tracking data';

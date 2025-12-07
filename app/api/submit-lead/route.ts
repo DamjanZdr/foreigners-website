@@ -1,6 +1,58 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import type { TrackingData } from '@/lib/utils/tracking';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// Workaround for Turbopack not loading non-NEXT_PUBLIC_ env vars
+// Read .env.local directly
+let SUPABASE_SERVICE_ROLE_KEY_CACHED: string | undefined;
+
+function getServiceRoleKey(): string | undefined {
+  if (SUPABASE_SERVICE_ROLE_KEY_CACHED) {
+    return SUPABASE_SERVICE_ROLE_KEY_CACHED;
+  }
+  
+  // Try process.env first (works in production)
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    SUPABASE_SERVICE_ROLE_KEY_CACHED = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    return SUPABASE_SERVICE_ROLE_KEY_CACHED;
+  }
+  
+  // Fallback: Read .env.local directly (Turbopack workaround)
+  try {
+    const envPath = join(process.cwd(), '.env.local');
+    const envContent = readFileSync(envPath, 'utf8');
+    console.log('[DEBUG] .env.local file read successfully');
+    console.log('[DEBUG] File content length:', envContent.length);
+    
+    // Match the line with SUPABASE_SERVICE_ROLE_KEY (handle Windows \r\n and Unix \n)
+    const lines = envContent.split(/\r?\n/);
+    console.log('[DEBUG] Total lines:', lines.length);
+    
+    const keyLine = lines.find(line => {
+      const trimmed = line.trim();
+      return trimmed.startsWith('SUPABASE_SERVICE_ROLE_KEY=');
+    });
+    
+    if (keyLine) {
+      const key = keyLine.substring(keyLine.indexOf('=') + 1).trim();
+      console.log('[DEBUG] Found service key, length:', key.length);
+      console.log('[DEBUG] Key starts with:', key.substring(0, 20));
+      SUPABASE_SERVICE_ROLE_KEY_CACHED = key;
+      return SUPABASE_SERVICE_ROLE_KEY_CACHED;
+    } else {
+      console.error('[DEBUG] SUPABASE_SERVICE_ROLE_KEY line not found in .env.local');
+      console.error('[DEBUG] Lines starting with SUPABASE:', 
+        lines.filter(l => l.includes('SUPABASE')).map(l => l.substring(0, 50))
+      );
+    }
+  } catch (error) {
+    console.error('Failed to read .env.local:', error);
+  }
+  
+  return undefined;
+}
 
 // Interface for form submission data
 interface LeadSubmission {
@@ -153,8 +205,35 @@ export async function POST(request: NextRequest) {
     
     console.log('Inserting data into Supabase:', leadData);
     
-    // Insert into Supabase
-    const { data, error } = await supabase
+    // Create admin client (bypasses RLS)
+    // Service key comes from environment variable (set in Vercel dashboard for production)
+    const serviceKey = getServiceRoleKey();
+    
+    if (!serviceKey) {
+      console.error('SUPABASE_SERVICE_ROLE_KEY not configured');
+      console.error('Tried process.env and .env.local file');
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+    
+    console.log('Service key loaded successfully');
+    console.log('Service key length:', serviceKey.length);
+    console.log('Service key preview:', serviceKey.substring(0, 20) + '...');
+    
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      serviceKey,
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false
+        }
+      }
+    );
+    
+    const { data, error } = await supabaseAdmin
       .from('lead_submissions')
       .insert([leadData])
       .select();

@@ -8,3 +8,5 @@ export { default as GlassBlob } from './GlassBlob';
 export { ParticleField } from './ParticleField';
 export { RippleButton } from './RippleButton';
 export { default as AnimatedTagline } from './AnimatedTagline';
+export { default as Footstep } from './Footstep';
+export { default as JourneyPath } from './JourneyPath';
