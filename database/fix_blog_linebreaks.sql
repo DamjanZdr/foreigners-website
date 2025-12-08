@@ -1,11 +1,11 @@
--- Fix blog post formatting: convert step headings to bold text
--- Changes "### Step 1: Title" to "**Step 1: Title**"
+-- Revert blog post formatting: remove double asterisks from step labels
+-- This removes the ** that are showing as literal text
 -- Run this in Supabase SQL Editor
 
 UPDATE blog_posts
 SET content = REGEXP_REPLACE(
   content, 
-  '###\s*(Step \d+: [^\n]+)',
-  '**\1**',
+  '\*\*(Step \d+: [^\n]+)\*\*',
+  '\1',
   'g'
 );

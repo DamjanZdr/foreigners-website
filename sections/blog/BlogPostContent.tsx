@@ -74,10 +74,10 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
           rehypePlugins={[rehypeRaw, rehypeSanitize]}
           components={{
             p: ({ children }) => <p className="mb-5 mt-0">{children}</p>,
-            h2: ({ children }) => <h2 className="text-xl font-bold mt-8 mb-0 leading-tight">{children}</h2>,
-            h3: ({ children }) => <h3 className="text-lg font-bold mt-6 mb-0 leading-tight">{children}</h3>,
-            ul: ({ children }) => <ul className="list-disc pl-6 mb-5 space-y-2">{children}</ul>,
-            ol: ({ children }) => <ol className="list-decimal pl-6 mb-5 space-y-2">{children}</ol>,
+            h2: ({ children }) => <h2 className="text-xl font-bold mt-8 mb-4 leading-tight">{children}</h2>,
+            h3: ({ children }) => <h3 className="text-lg font-bold mt-6 mb-3 leading-tight">{children}</h3>,
+            ul: ({ children }) => <ul className="list-disc pl-6 mb-5 mt-0 space-y-2">{children}</ul>,
+            ol: ({ children }) => <ol className="list-decimal pl-6 mb-5 mt-0 space-y-2">{children}</ol>,
             li: ({ children }) => <li className="text-gray-700">{children}</li>,
               a: ({ href, children }) => (
                 <a 
