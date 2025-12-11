@@ -108,7 +108,7 @@ export default function Navbar() {
           />
           
           {/* Menu Panel */}
-          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white md:hidden z-50 shadow-2xl transform transition-transform duration-300 ease-in-out">
+          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white md:hidden z-50 shadow-2xl">
             <div className="flex flex-col h-full">
               {/* Menu Header */}
               <div className="flex items-center justify-between p-4 border-b">
