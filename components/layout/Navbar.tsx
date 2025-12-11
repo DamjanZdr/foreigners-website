@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { theme } from '@/lib/theme';
@@ -12,6 +13,15 @@ export default function Navbar() {
   const { isOpen, toggle, close } = useMobileMenu();
   const { isScrolled } = useScrollPosition();
   const router = useRouter();
+  const [isClosing, setIsClosing] = React.useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      close();
+      setIsClosing(false);
+    }, 300); // Match animation duration
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Check if it's a section anchor link
@@ -31,7 +41,7 @@ export default function Navbar() {
           element?.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       }
-      close();
+      handleClose();
     }
   };
 
@@ -102,17 +112,17 @@ export default function Navbar() {
         <>
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/50 z-40 md:hidden animate-fadeIn"
-            onClick={close}
+            className={`fixed inset-0 bg-black/50 z-[200] md:hidden ${isClosing ? 'animate-fadeOut' : 'animate-fadeIn'}`}
+            onClick={handleClose}
           />
           
           {/* Menu Panel */}
-          <div className="fixed top-0 bottom-0 right-0 w-80 bg-white z-50 md:hidden flex flex-col h-screen shadow-2xl animate-slideInRight">
+          <div className={`fixed top-0 bottom-0 right-0 w-80 bg-white z-[201] md:hidden flex flex-col h-screen shadow-2xl ${isClosing ? 'animate-slideOutRight' : 'animate-slideInRight'}`}>
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
               <h2 className="text-2xl font-bold text-gray-900">Menu</h2>
               <button
-                onClick={close}
+                onClick={handleClose}
                 className="p-2 -mr-2 text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,7 +140,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={(e) => {
                       handleNavClick(e, link.href);
-                      close();
+                      handleClose();
                     }}
                     className="block px-5 py-4 text-lg font-medium text-gray-700 hover:bg-red-50 hover:text-primary rounded-xl transition-all duration-200 hover:translate-x-1"
                     style={{ animationDelay: `${index * 50}ms` }}

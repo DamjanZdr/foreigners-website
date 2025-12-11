@@ -67,12 +67,38 @@
   }
 }
 
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .animate-slideInRight {
   animation: slideInRight 0.3s ease-out forwards;
 }
 
+.animate-slideOutRight {
+  animation: slideOutRight 0.3s ease-out forwards;
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.3s ease-out forwards;
 }
 
 /* Fade in animation for footsteps */
