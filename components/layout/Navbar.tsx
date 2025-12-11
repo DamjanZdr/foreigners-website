@@ -125,18 +125,22 @@ export default function Navbar() {
               </div>
 
               {/* Menu Items */}
-              <div className="flex-1 overflow-y-auto p-4">
+              <div className="flex-1 overflow-y-auto p-4 bg-white">
                 <nav className="space-y-2">
-                  {navContent.mobileLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block text-gray-700 hover:text-primary hover:bg-gray-50 px-4 py-3 ${theme.radius.md} ${theme.fontSize.base} ${theme.fontWeight.medium} ${theme.transition.default}`}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  {navContent.mobileLinks && navContent.mobileLinks.length > 0 ? (
+                    navContent.mobileLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                        className="block text-gray-900 hover:text-primary hover:bg-gray-50 px-4 py-3 rounded-md text-base font-medium transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="text-red-500 p-4">No menu items found</div>
+                  )}
                 </nav>
               </div>
 
