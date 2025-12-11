@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`${theme.glass.light} sticky top-0 z-[150] ${theme.transition.default} ${isScrolled ? theme.shadow.lg : theme.shadow.sm}`}>
+    <nav className={`${theme.glass.light} sticky top-0 z-[100] ${theme.transition.default} ${isScrolled ? theme.shadow.lg : theme.shadow.sm}`}>
       <div className={theme.spacing.container}>
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -108,7 +108,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu - Full screen overlay */}
-      {isOpen && (
+      {(isOpen || isClosing) && (
         <>
           {/* Backdrop */}
           <div 
