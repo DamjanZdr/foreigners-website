@@ -57,11 +57,11 @@ export default function Navbar() {
   return (
     <>
       <nav className={`${theme.glass.light} sticky top-0 z-[100] ${theme.transition.default} ${isScrolled ? theme.shadow.lg : theme.shadow.sm}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto pl-0 pr-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div>
-              <Link href="/" className="flex items-center -ml-3 sm:-ml-2 lg:ml-0">
+              <Link href="/" className="flex items-center">
                 <Logo width={220} height={50} className="hover:opacity-80 transition-opacity" />
               </Link>
             </div>
