@@ -12,7 +12,7 @@ export default function Logo({ className = '', width = 180, height = 40 }: LogoP
       className={className}
       width={width}
       height={height}
-      viewBox="0 0 1080 344.63"
+      viewBox="130 0 950 344.63"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
