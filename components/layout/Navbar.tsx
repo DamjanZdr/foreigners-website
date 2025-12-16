@@ -58,11 +58,11 @@ export default function Navbar() {
   return (
     <>
       <nav className={`${theme.glass.light} sticky top-0 z-[100] ${theme.transition.default} ${isScrolled ? theme.shadow.lg : theme.shadow.sm}`}>
-        <Container>
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8">
             {/* Logo */}
-            <div className="flex-shrink-0 -ml-4 sm:-ml-2 lg:ml-0">
-              <Link href="/" className="flex items-center">
+            <div className="flex-shrink-0">
+              <Link href="/" className="flex items-center -ml-4 sm:ml-0">
                 <Logo width={220} height={50} className="hover:opacity-80 transition-opacity" />
               </Link>
             </div>
@@ -116,7 +116,7 @@ export default function Navbar() {
               </button>
             </div>
           </div>
-        </Container>
+        </div>
       </nav>
 
       {/* Mobile menu - Full screen overlay (outside nav for proper z-index stacking) */}
