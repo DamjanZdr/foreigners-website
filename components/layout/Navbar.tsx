@@ -60,7 +60,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="-ml-4 sm:-ml-3 lg:-ml-2">
+            <div className="-ml-5 sm:-ml-4 lg:-ml-3">
               <Link href="/" className="flex items-center">
                 <Logo width={220} height={50} className="hover:opacity-80 transition-opacity" />
               </Link>
