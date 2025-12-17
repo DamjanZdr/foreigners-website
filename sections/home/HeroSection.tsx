@@ -10,17 +10,15 @@ import { heroContent } from '@/lib/content';
 export default function HeroSection() {
   return (
     <Section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-red-50/30">
-      {/* Glass Blobs - Apple-inspired glassmorphism effect */}
-      <div className="opacity-30 md:opacity-100">
-        <GlassBlob color="#fdeee7" size={550} top="12%" left="-12%" delay={0} duration={25} blur={12} opacity={0.7} />
-        <GlassBlob color="#fce4d6" size={450} top="3%" left="8%" delay={2} duration={30} blur={10} opacity={0.65} />
-        <GlassBlob color="#fdd5c4" size={380} top="30%" right="3%" delay={1} duration={28} blur={10} opacity={0.6} />
-        <GlassBlob color="#fdeee7" size={480} bottom="3%" right="-10%" delay={4} duration={22} blur={12} opacity={0.68} />
-        <GlassBlob color="#fcc9b3" size={320} bottom="22%" left="10%" delay={3} duration={26} blur={8} opacity={0.55} />
-        <GlassBlob color="#fbd4c0" size={280} top="52%" left="32%" delay={5} duration={24} blur={8} opacity={0.5} />
-        <GlassBlob color="#fce4d6" size={350} top="10%" right="22%" delay={2.5} duration={27} blur={10} opacity={0.58} />
-        <GlassBlob color="#fdeee7" size={300} top="40%" left="5%" delay={2.2} duration={28} blur={9} opacity={0.6} />
-      </div>
+      {/* Glass Blobs - More subtle and glassy */}
+      <GlassBlob color="#fdeee7" size={480} top="8%" left="-8%" delay={0} duration={27} blur={20} opacity={0.25} />
+      <GlassBlob color="#fce4d6" size={420} top="15%" right="-5%" delay={1.5} duration={31} blur={18} opacity={0.22} />
+      <GlassBlob color="#fdd5c4" size={350} bottom="10%" right="5%" delay={3} duration={25} blur={16} opacity={0.20} />
+      <GlassBlob color="#fcc9b3" size={300} bottom="20%" left="8%" delay={2} duration={28} blur={16} opacity={0.18} />
+      
+      {/* Additional accent blobs */}
+      <GlassBlob color="#fbd4c0" size={220} top="50%" left="30%" delay={4} duration={24} blur={14} opacity={0.15} />
+      <GlassBlob color="#fdeee7" size={180} bottom="35%" right="28%" delay={3.5} duration={26} blur={12} opacity={0.12} />
 
       {/* Gradient fade to white at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white/95 via-white/50 to-transparent pointer-events-none z-0" />
