@@ -22,12 +22,12 @@ export default function PrivacyPolicyPage() {
                 <h1 className="text-4xl font-bold text-gray-900">
                   {privacyPolicyContent.title}
                 </h1>
-                <div className="flex gap-3 flex-shrink-0">
+                <div className="flex-shrink-0">
                   <a
-                    href="/privacy-policy-en.pdf"
-                    download="Privacy-Policy.pdf"
+                    href="/privacy-policy.pdf"
+                    download="Privacy-Policy-Polityka-Prywatnosci.pdf"
                     className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                    aria-label="Download Privacy Policy PDF (English)"
+                    aria-label="Download Privacy Policy PDF (English & Polish) / Pobierz PDF Polityki Prywatności (Polski i Angielski)"
                   >
                     <svg
                       className="w-5 h-5"
@@ -41,27 +41,7 @@ export default function PrivacyPolicyPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-sm font-medium">EN PDF</span>
-                  </a>
-                  <a
-                    href="/privacy-policy-pl.pdf"
-                    download="Polityka-Prywatnosci.pdf"
-                    className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                    aria-label="Pobierz PDF Polityki Prywatności (Polski)"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">PL PDF</span>
+                    <span className="text-sm font-medium">Download PDF</span>
                   </a>
                 </div>
               </div>
