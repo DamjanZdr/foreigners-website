@@ -70,7 +70,8 @@ interface LeadSubmission {
   full_name: string;
   email: string;
   phone: string;
-  contact_method: string;
+  contact_method?: string;
+  description: string;
   source: string;
   privacy_accepted: boolean;
   
