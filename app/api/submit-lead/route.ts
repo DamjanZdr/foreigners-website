@@ -309,17 +309,17 @@ export async function POST(request: NextRequest) {
     console.log('Received form submission:', body);
     
     // Validate required fields
-    if (!body.full_name || !body.email || !body.phone || !body.contact_method || !body.source || body.privacy_accepted !== true) {
+    if (!body.full_name || !body.email || !body.phone || !body.description || !body.source || body.privacy_accepted !== true) {
       console.log('Validation failed:', {
         full_name: !!body.full_name,
         email: !!body.email,
         phone: !!body.phone,
-        contact_method: !!body.contact_method,
+        description: !!body.description,
         source: !!body.source,
         privacy_accepted: body.privacy_accepted
       });
       return NextResponse.json(
-        { error: 'Missing required fields: name, email, phone, contact method, and privacy acceptance are required' },
+        { error: 'Missing required fields: name, email, phone, description, and privacy acceptance are required' },
         { status: 400 }
       );
     }
