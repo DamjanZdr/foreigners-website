@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { Card } from '@/components/ui/cards';
-import { Input, Select, Checkbox } from '@/components/ui/inputs';
+import { Input, Checkbox } from '@/components/ui/inputs';
 import { Button } from '@/components/ui/buttons';
 import { theme } from '@/lib/theme';
 import { collectTrackingData } from '@/lib/utils/tracking';
+import { countryCodes } from '@/lib/data/countryCodes';
+import CustomSelect from '@/components/ui/inputs/CustomSelect';
 
 interface LeadFormProps {
   title?: string;
@@ -18,6 +20,7 @@ export default function LeadForm({
 }: LeadFormProps) {
   const [formData, setFormData] = useState({
     fullName: '',
+    phoneCountryCode: 'PL:+48', // Store as code:dialCode
     contactNumber: '',
     email: '',
     contactMethod: '',
@@ -41,10 +44,12 @@ export default function LeadForm({
       console.log('[Form] Collected tracking data:', trackingData);
 
       // Prepare submission data
+      const dialCode = formData.phoneCountryCode.split(':')[1]; // Extract dial code from "CODE:+XX"
       const submissionData = {
         full_name: formData.fullName,
         email: formData.email,
         phone: formData.contactNumber,
+        phone_country_code: dialCode,
         contact_method: formData.contactMethod,
         source: source,
         privacy_accepted: formData.acceptedTerms,
@@ -72,10 +77,12 @@ export default function LeadForm({
 
       // Success
       console.log('[Form] ✅ Submission successful!');
-      setSubmittedPhone(formData.contactNumber);
+      const displayDialCode = formData.phoneCountryCode.split(':')[1];
+      setSubmittedPhone(displayDialCode + ' ' + formData.contactNumber);
       setSubmitStatus('success');
       setFormData({
         fullName: '',
+        phoneCountryCode: 'PL:+48',
         contactNumber: '',
         email: '',
         contactMethod: '',
@@ -93,10 +100,16 @@ export default function LeadForm({
   };
 
   const contactMethods = [
-    { value: 'call', label: 'Phone Call' },
-    { value: 'whatsapp', label: 'WhatsApp' },
-    { value: 'email', label: 'Email' },
+    { value: 'call', label: 'Phone Call', icon: '📞' },
+    { value: 'whatsapp', label: 'WhatsApp', icon: '💬' },
+    { value: 'email', label: 'Email', icon: '✉️' },
   ];
+
+  const countryOptions = countryCodes.map(country => ({
+    value: `${country.code}:${country.dialCode}`, // Use country code + dial code as unique key
+    label: `${country.name} ${country.dialCode}`,
+    code: country.code, // Pass country code for styled badge display
+  }));
 
   return (
     <div className="relative max-w-md mx-auto">
@@ -153,99 +166,105 @@ export default function LeadForm({
             )}
             
             <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            id="fullName"
-            label="Full Name"
-            required
-            placeholder="Enter your full name"
-            value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-          />
-
-          <div>
-            <label htmlFor="contactNumber" className={`block ${theme.fontSize.sm} ${theme.fontWeight.semibold} text-gray-700 mb-2`}>
-              Contact Number*
-            </label>
-            <div className="flex gap-2">
-              <div className={`w-16 px-2 py-2 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm flex items-center justify-center`}>
-                <span className={`${theme.fontSize.xs} ${theme.fontWeight.medium}`}> +48</span>
-              </div>
-              <input
-                type="tel"
-                id="contactNumber"
+              <Input
+                id="fullName"
+                label="Full Name"
                 required
-                className={`flex-1 px-3 py-2 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
-                placeholder="123 456 789"
-                value={formData.contactNumber}
-                onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
+                placeholder="Enter your full name"
+                value={formData.fullName}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
               />
-            </div>
-            <p className={`mt-1 ${theme.fontSize.xs} text-primary`}>
-              This number has to be available on WhatsApp
-            </p>
-          </div>
 
-          <Input
-            id="email"
-            label="Email"
-            type="email"
-            required
-            placeholder="your.email@example.com"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
+              <div>
+                <label htmlFor="contactNumber" className={`block ${theme.fontSize.sm} ${theme.fontWeight.semibold} text-gray-700 mb-2`}>
+                  Contact Number*
+                </label>
+                <div className="flex gap-2">
+                  <div className="w-48">
+                    <CustomSelect
+                      value={formData.phoneCountryCode}
+                      onChange={(value) => setFormData({ ...formData, phoneCountryCode: value })}
+                      options={countryOptions}
+                      placeholder="Country"
+                      showSearch={true}
+                    />
+                  </div>
+                  <input
+                    type="tel"
+                    id="contactNumber"
+                    required
+                    className={`flex-1 px-3 py-2 ${theme.radius.md} border border-gray-100/50 bg-white/95 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none ${theme.transition.default}`}
+                    placeholder="123 456 789"
+                    value={formData.contactNumber}
+                    onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
+                  />
+                </div>
+                <p className={`mt-1 ${theme.fontSize.xs} text-primary`}>
+                  This number has to be available on WhatsApp
+                </p>
+              </div>
 
-          <Select
-            id="contactMethod"
-            label="Contact Method"
-            required
-            placeholder="Select a method"
-            value={formData.contactMethod}
-            onChange={(e) => setFormData({ ...formData, contactMethod: e.target.value })}
-            options={contactMethods}
-          />
+              <Input
+                id="email"
+                label="Email"
+                type="email"
+                required
+                placeholder="your.email@example.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
 
-          <Checkbox
-            id="terms"
-            required
-            checked={formData.acceptedTerms}
-            onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
-            label={
-              <>
-                I have read and accepted the{' '}
-                <a href="/privacy-policy" className="text-primary hover:underline">
-                  Privacy Policy
-                </a>
-                {' '}and{' '}
-                <a href="/terms" className="text-primary hover:underline">
-                  Terms and Conditions of Service
-                </a>
-              </>
-            }
-          />
+              <CustomSelect
+                id="contactMethod"
+                label="Contact Method"
+                required
+                placeholder="Select a method"
+                value={formData.contactMethod}
+                onChange={(value) => setFormData({ ...formData, contactMethod: value })}
+                options={contactMethods}
+              />
 
-          {submitStatus === 'error' && (
-            <div className={`p-3 ${theme.radius.md} bg-red-50 border border-red-200`}>
-              <p className={`${theme.fontSize.sm} text-red-800 ${theme.fontWeight.semibold}`}>
-                ✗ {errorMessage || 'Something went wrong. Please try again.'}
+              <Checkbox
+                id="terms"
+                required
+                checked={formData.acceptedTerms}
+                onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
+                label={
+                  <>
+                    I have read and accepted the{' '}
+                    <a href="/privacy-policy" className="text-primary hover:underline">
+                      Privacy Policy
+                    </a>
+                    {' '}and{' '}
+                    <a href="/terms" className="text-primary hover:underline">
+                      Terms and Conditions of Service
+                    </a>
+                  </>
+                }
+              />
+
+              {submitStatus === 'error' && (
+                <div className={`p-3 ${theme.radius.md} bg-red-50 border border-red-200`}>
+                  <p className={`${theme.fontSize.sm} text-red-800 ${theme.fontWeight.semibold}`}>
+                    ✗ {errorMessage || 'Something went wrong. Please try again.'}
+                  </p>
+                </div>
+              )}
+
+              <Button 
+                type="submit" 
+                variant="primary" 
+                size="md" 
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit'}
+              </Button>
+              
+              <p className={`text-center ${theme.fontSize.xs} text-gray-600`}>
+                for a Free Consultation
               </p>
-            </div>
-          )}
-
-          <Button 
-            type="submit" 
-            variant="primary" 
-            size="md" 
-            className="w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
-          </Button>
-          
-          <p className={`text-center ${theme.fontSize.xs} text-gray-600`}>
-            for a Free Consultation
-          </p>
-        </form>
+            </form>
           </>
         )}
       </Card>

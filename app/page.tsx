@@ -7,6 +7,7 @@ import ServicesSection from '@/sections/home/ServicesSection';
 import MidCtaSection from '@/sections/home/MidCtaSection';
 import OfficesSection from '@/sections/home/OfficesSection';
 import GoogleReviewsSection from '@/sections/home/GoogleReviewsSection';
+import PartnersSection from '@/sections/home/PartnersSection';
 import ConsultationSection from '@/sections/home/ConsultationSection';
 
 export default function Home() {
@@ -16,10 +17,11 @@ export default function Home() {
       
       <div className="relative min-h-screen">
         <HeroSection />
+        <PartnersSection />
         <ServicesSection />
         <MidCtaSection />
         <OfficesSection />
-        <GoogleReviewsSection />
+        {/* <GoogleReviewsSection /> */}
         <ConsultationSection />
       </div>
       <Footer />

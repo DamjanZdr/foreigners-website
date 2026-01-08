@@ -3,55 +3,65 @@ import { createClient } from '@supabase/supabase-js';
 import type { TrackingData } from '@/lib/utils/tracking';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { Resend } from 'resend';
+import { AdminNotificationEmail, ClientConfirmationEmail } from '@/lib/email/templates';
 
 // Workaround for Turbopack not loading non-NEXT_PUBLIC_ env vars
 // Read .env.local directly
 let SUPABASE_SERVICE_ROLE_KEY_CACHED: string | undefined;
+let RESEND_API_KEY_CACHED: string | undefined;
+let BUSINESS_EMAIL_CACHED: string | undefined;
+
+function getEnvValue(key: string): string | undefined {
+  // For non-NEXT_PUBLIC_ variables, always read from .env.local directly
+  // This bypasses Turbopack caching issues
+  try {
+    const envPath = join(process.cwd(), '.env.local');
+    const envContent = readFileSync(envPath, 'utf8');
+    
+    const lines = envContent.split(/\r?\n/);
+    const keyLine = lines.find(line => {
+      const trimmed = line.trim();
+      return trimmed.startsWith(`${key}=`);
+    });
+    
+    if (keyLine) {
+      const value = keyLine.substring(keyLine.indexOf('=') + 1).trim();
+      console.log(`[ENV] ${key} from file:`, value);
+      return value;
+    }
+  } catch (error) {
+    console.error(`Failed to read ${key} from .env.local:`, error);
+  }
+  
+  // Fallback to process.env (for production where file may not exist)
+  const envValue = process.env[key];
+  console.log(`[ENV] ${key} from process.env:`, envValue);
+  return envValue;
+}
 
 function getServiceRoleKey(): string | undefined {
   if (SUPABASE_SERVICE_ROLE_KEY_CACHED) {
     return SUPABASE_SERVICE_ROLE_KEY_CACHED;
   }
-  
-  // Try process.env first (works in production)
-  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    SUPABASE_SERVICE_ROLE_KEY_CACHED = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    return SUPABASE_SERVICE_ROLE_KEY_CACHED;
+  SUPABASE_SERVICE_ROLE_KEY_CACHED = getEnvValue('SUPABASE_SERVICE_ROLE_KEY');
+  return SUPABASE_SERVICE_ROLE_KEY_CACHED;
+}
+
+function getResendApiKey(): string | undefined {
+  if (RESEND_API_KEY_CACHED) {
+    return RESEND_API_KEY_CACHED;
   }
-  
-  // Fallback: Read .env.local directly (Turbopack workaround)
-  try {
-    const envPath = join(process.cwd(), '.env.local');
-    const envContent = readFileSync(envPath, 'utf8');
-    console.log('[DEBUG] .env.local file read successfully');
-    console.log('[DEBUG] File content length:', envContent.length);
-    
-    // Match the line with SUPABASE_SERVICE_ROLE_KEY (handle Windows \r\n and Unix \n)
-    const lines = envContent.split(/\r?\n/);
-    console.log('[DEBUG] Total lines:', lines.length);
-    
-    const keyLine = lines.find(line => {
-      const trimmed = line.trim();
-      return trimmed.startsWith('SUPABASE_SERVICE_ROLE_KEY=');
-    });
-    
-    if (keyLine) {
-      const key = keyLine.substring(keyLine.indexOf('=') + 1).trim();
-      console.log('[DEBUG] Found service key, length:', key.length);
-      console.log('[DEBUG] Key starts with:', key.substring(0, 20));
-      SUPABASE_SERVICE_ROLE_KEY_CACHED = key;
-      return SUPABASE_SERVICE_ROLE_KEY_CACHED;
-    } else {
-      console.error('[DEBUG] SUPABASE_SERVICE_ROLE_KEY line not found in .env.local');
-      console.error('[DEBUG] Lines starting with SUPABASE:', 
-        lines.filter(l => l.includes('SUPABASE')).map(l => l.substring(0, 50))
-      );
-    }
-  } catch (error) {
-    console.error('Failed to read .env.local:', error);
+  RESEND_API_KEY_CACHED = getEnvValue('RESEND_API_KEY');
+  return RESEND_API_KEY_CACHED;
+}
+
+function getBusinessEmail(): string | undefined {
+  if (BUSINESS_EMAIL_CACHED) {
+    return BUSINESS_EMAIL_CACHED;
   }
-  
-  return undefined;
+  BUSINESS_EMAIL_CACHED = getEnvValue('BUSINESS_EMAIL');
+  return BUSINESS_EMAIL_CACHED;
 }
 
 // Interface for form submission data
@@ -133,6 +143,109 @@ async function getGeolocation(ip: string) {
   }
 }
 
+// Send email notifications
+async function sendEmailNotifications(
+  leadData: any,
+  ipAddress: string,
+  geoData: any
+) {
+  const resendKey = getResendApiKey();
+  // Read fresh every time to avoid caching issues
+  const adminEmail = getEnvValue('BUSINESS_EMAIL');
+  
+  console.log('📧 Sending emails - Admin to:', adminEmail, '| Client to:', leadData.email);
+  
+  if (!resendKey) {
+    console.log('⚠️ RESEND_API_KEY not configured - skipping email notifications');
+    return { success: false, reason: 'RESEND_API_KEY not configured' };
+  }
+  
+  const resend = new Resend(resendKey);
+  
+  if (!adminEmail) {
+    console.warn('⚠️ BUSINESS_EMAIL not configured - skipping admin notification');
+  }
+  
+  try {
+    // Send admin notification email first
+    if (adminEmail) {
+      try {
+        const adminResult = await resend.emails.send({
+          from: 'Website Leads <onboarding@resend.dev>',
+          to: adminEmail,
+          subject: `New Lead: ${leadData.full_name}`,
+          html: AdminNotificationEmail({
+            fullName: leadData.full_name,
+            email: leadData.email,
+            phone: leadData.phone,
+            phoneCountryCode: leadData.phone_country_code,
+            contactMethod: leadData.contact_method,
+            source: leadData.source,
+            tracking: {
+              referrer: leadData.referrer,
+              utm_source: leadData.utm_source,
+              utm_medium: leadData.utm_medium,
+              utm_campaign: leadData.utm_campaign,
+              device_type: leadData.device_type,
+              browser: leadData.browser_name,
+            },
+            ipAddress: ipAddress,
+            location: {
+              city: geoData.city,
+              region: geoData.region,
+              country_name: geoData.country_name,
+            },
+            submittedAt: new Date().toISOString(),
+          }),
+        });
+        console.log('✅ Admin email result:', adminResult);
+      } catch (adminError) {
+        console.error('❌ Admin email error:', adminError);
+      }
+    }
+    
+    // Small delay to avoid rate limiting
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Send client confirmation email
+    try {
+      const clientResult = await resend.emails.send({
+        from: 'Foreigners <onboarding@resend.dev>',
+        to: leadData.email,
+        subject: 'Thank you for contacting us!',
+        html: ClientConfirmationEmail({
+          fullName: leadData.full_name,
+          contactMethod: leadData.contact_method,
+          source: leadData.source,
+        }),
+      });
+      console.log('✅ Client email result:', clientResult);
+    } catch (clientError) {
+      console.error('❌ Client email error:', clientError);
+    }
+    
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Error sending emails:', error);
+    return { success: false, error };
+  }
+}
+
+// Interface for form submission data
+interface LeadSubmission {
+  // Contact Information
+  full_name: string;
+  email: string;
+  phone: string;
+  phone_country_code?: string;
+  contact_method: string;
+  source: string;
+  privacy_accepted: boolean;
+  
+  // Tracking data (optional)
+  tracking?: TrackingData;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body: LeadSubmission = await request.json();
@@ -167,6 +280,7 @@ export async function POST(request: NextRequest) {
       full_name: body.full_name,
       email: body.email,
       phone: body.phone,
+      phone_country_code: body.phone_country_code || '+48',
       contact_method: body.contact_method,
       source: body.source,
       privacy_accepted: body.privacy_accepted,
@@ -247,6 +361,11 @@ export async function POST(request: NextRequest) {
     }
     
     console.log('Successfully inserted:', data);
+    
+    // Send email notifications (non-blocking - don't fail submission if emails fail)
+    sendEmailNotifications(leadData, ip_address, geoData).catch(error => {
+      console.error('Email notification error (non-critical):', error);
+    });
     
     return NextResponse.json(
       { success: true, data },

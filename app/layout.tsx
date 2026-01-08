@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "flag-icons/css/flag-icons.min.css";
 // import CustomCursor from "@/components/ui/CustomCursor";
 import CookieConsent from "@/components/CookieConsent";
 import SessionTracker from "@/components/SessionTracker";
