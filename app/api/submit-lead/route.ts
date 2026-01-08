@@ -187,7 +187,7 @@ async function sendEmailNotifications(
               utm_medium: leadData.utm_medium,
               utm_campaign: leadData.utm_campaign,
               device_type: leadData.device_type,
-              browser: leadData.browser_name,
+              browser_name: leadData.browser_name,
             },
             ipAddress: ipAddress,
             location: {
@@ -227,6 +227,62 @@ async function sendEmailNotifications(
     return { success: true };
   } catch (error) {
     console.error('❌ Error sending emails:', error);
+    return { success: false, error };
+  }
+}
+
+// Function to send lead data to CRM
+async function sendToCRM(leadData: any) {
+  const crmUrl = process.env.CRM_WEBHOOK_URL || 'https://crm.foreigners.pl/api/webhooks/leads';
+  const crmSecret = process.env.CRM_WEBHOOK_SECRET;
+
+  if (!crmSecret) {
+    console.log('⚠️ CRM webhook secret not configured, skipping');
+    return;
+  }
+
+  try {
+    console.log('📤 Sending lead to CRM...');
+    
+    const response = await fetch(crmUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${crmSecret}`,
+      },
+      body: JSON.stringify({
+        full_name: leadData.full_name,
+        email: leadData.email,
+        phone_country_code: leadData.phone_country_code,
+        phone: leadData.phone,
+        description: leadData.description,
+        source: leadData.source,
+        privacy_accepted: leadData.privacy_accepted,
+        tracking: {
+          ip: leadData.ip,
+          city: leadData.city,
+          country: leadData.country_name,
+          userAgent: leadData.user_agent,
+          referrer: leadData.referrer,
+          utm_campaign: leadData.utm_campaign,
+          utm_source: leadData.utm_source,
+          utm_medium: leadData.utm_medium,
+        }
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`CRM webhook error: ${response.status} - ${errorText}`);
+    }
+
+    const result = await response.json();
+    console.log('✅ CRM sync successful:', result);
+    return { success: true, result };
+    
+  } catch (error) {
+    console.error('❌ CRM sync failed:', error);
+    // Don't throw - we don't want to fail the form submission
     return { success: false, error };
   }
 }
@@ -365,6 +421,11 @@ export async function POST(request: NextRequest) {
     // Send email notifications (non-blocking - don't fail submission if emails fail)
     sendEmailNotifications(leadData, ip_address, geoData).catch(error => {
       console.error('Email notification error (non-critical):', error);
+    });
+
+    // Send to CRM (non-blocking - don't fail submission if CRM is down)
+    sendToCRM(leadData).catch(error => {
+      console.error('CRM sync error (non-critical):', error);
     });
     
     return NextResponse.json(

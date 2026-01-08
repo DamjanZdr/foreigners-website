@@ -23,7 +23,7 @@ export default function LeadForm({
     phoneCountryCode: 'PL:+48', // Store as code:dialCode
     contactNumber: '',
     email: '',
-    contactMethod: '',
+    description: '',
     acceptedTerms: false,
   });
 
@@ -50,7 +50,7 @@ export default function LeadForm({
         email: formData.email,
         phone: formData.contactNumber,
         phone_country_code: dialCode,
-        contact_method: formData.contactMethod,
+        description: formData.description,
         source: source,
         privacy_accepted: formData.acceptedTerms,
         tracking: trackingData,
@@ -85,7 +85,7 @@ export default function LeadForm({
         phoneCountryCode: 'PL:+48',
         contactNumber: '',
         email: '',
-        contactMethod: '',
+        description: '',
         acceptedTerms: false,
       });
 
@@ -98,12 +98,6 @@ export default function LeadForm({
       setIsSubmitting(false);
     }
   };
-
-  const contactMethods = [
-    { value: 'call', label: 'Phone Call', icon: '📞' },
-    { value: 'whatsapp', label: 'WhatsApp', icon: '💬' },
-    { value: 'email', label: 'Email', icon: '✉️' },
-  ];
 
   const countryOptions = countryCodes.map(country => ({
     value: `${country.code}:${country.dialCode}`, // Use country code + dial code as unique key
@@ -214,15 +208,20 @@ export default function LeadForm({
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
 
-              <CustomSelect
-                id="contactMethod"
-                label="Contact Method"
-                required
-                placeholder="Select a method"
-                value={formData.contactMethod}
-                onChange={(value) => setFormData({ ...formData, contactMethod: value })}
-                options={contactMethods}
-              />
+              <div className="space-y-2">
+                <label htmlFor="description" className={`block ${theme.fontSize.sm} ${theme.fontWeight.medium} text-gray-700`}>
+                  Description <span className="text-red-600">*</span>
+                </label>
+                <textarea
+                  id="description"
+                  required
+                  placeholder="Tell us about your situation or what you need help with..."
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  rows={4}
+                  className={`w-full px-4 py-3 ${theme.radius.lg} border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all ${theme.fontSize.base}`}
+                />
+              </div>
 
               <Checkbox
                 id="terms"
