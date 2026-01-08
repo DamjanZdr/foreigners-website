@@ -118,10 +118,10 @@ export function AdminNotificationEmail({
           <td style="padding: 6px 0;">${tracking.device_type}</td>
         </tr>
         ` : ''}
-        ${tracking?.browser ? `
+        ${tracking?.browser_name ? `
         <tr>
           <td style="padding: 6px 0; font-weight: 600; color: #666;">Browser:</td>
-          <td style="padding: 6px 0;">${tracking.browser}</td>
+          <td style="padding: 6px 0;">${tracking.browser_name}</td>
         </tr>
         ` : ''}
       </table>
