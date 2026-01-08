@@ -193,7 +193,7 @@ export default function LeadForm({
                     onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
                   />
                 </div>
-                <p className={`mt-1 ${theme.fontSize.xs} text-primary`}>
+                <p className={`mt-1 ${theme.fontSize.xs} text-gray-600 italic`}>
                   This number has to be available on WhatsApp
                 </p>
               </div>

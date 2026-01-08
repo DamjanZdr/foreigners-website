@@ -294,7 +294,8 @@ interface LeadSubmission {
   email: string;
   phone: string;
   phone_country_code?: string;
-  contact_method: string;
+  contact_method?: string;
+  description: string;
   source: string;
   privacy_accepted: boolean;
   
