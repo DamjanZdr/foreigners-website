@@ -240,12 +240,12 @@ async function sendEmailNotifications(
 
 // Function to send lead data to CRM
 async function sendToCRM(leadData: any) {
+    const crmUrl = process.env.CRM_WEBHOOK_URL || 'https://crm.foreigners.pl/api/webhooks/leads';
+    const crmSecret = process.env.CRM_WEBHOOK_SECRET;
     // Log Authorization header for debugging
     console.log('CRM Request Headers:', {
       'Authorization': 'Bearer ' + crmSecret
     });
-  const crmUrl = process.env.CRM_WEBHOOK_URL || 'https://crm.foreigners.pl/api/webhooks/leads';
-  const crmSecret = process.env.CRM_WEBHOOK_SECRET;
 
   if (!crmSecret) {
     console.log('⚠️ CRM webhook secret not configured, skipping');
