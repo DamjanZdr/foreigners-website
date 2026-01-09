@@ -302,12 +302,21 @@ async function sendToCRM(leadData: any) {
       }),
     });
 
-    console.log('CRM Response Status:', response.status);
-    const responseText = await response.text();
+    // Log full response for debugging
+    const responseStatus = response.status;
+    const responseHeaders = Object.fromEntries(response.headers.entries());
+    let responseText;
+    try {
+      responseText = await response.text();
+    } catch (e) {
+      responseText = '[Error reading response body]';
+    }
+    console.log('CRM Response Status:', responseStatus);
+    console.log('CRM Response Headers:', responseHeaders);
     console.log('CRM Response Body:', responseText);
 
     if (!response.ok) {
-      throw new Error(`CRM webhook error: ${response.status} - ${responseText}`);
+      throw new Error(`CRM webhook error: ${responseStatus} - ${responseText}`);
     }
 
     let result = null;
