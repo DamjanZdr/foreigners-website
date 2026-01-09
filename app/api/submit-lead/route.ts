@@ -250,7 +250,27 @@ async function sendToCRM(leadData: any) {
 
   try {
     console.log('📤 Sending lead to CRM...');
-    
+    console.log('CRM URL:', crmUrl);
+    console.log('CRM Request Body:', JSON.stringify({
+      full_name: leadData.full_name,
+      email: leadData.email,
+      phone_country_code: leadData.phone_country_code,
+      phone: leadData.phone,
+      description: leadData.description,
+      source: leadData.source,
+      privacy_accepted: leadData.privacy_accepted,
+      tracking: {
+        ip: leadData.ip,
+        city: leadData.city,
+        country: leadData.country_name,
+        userAgent: leadData.user_agent,
+        referrer: leadData.referrer,
+        utm_campaign: leadData.utm_campaign,
+        utm_source: leadData.utm_source,
+        utm_medium: leadData.utm_medium,
+      }
+    }, null, 2));
+
     const response = await fetch(crmUrl, {
       method: 'POST',
       headers: {
@@ -278,15 +298,23 @@ async function sendToCRM(leadData: any) {
       }),
     });
 
+    console.log('CRM Response Status:', response.status);
+    const responseText = await response.text();
+    console.log('CRM Response Body:', responseText);
+
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`CRM webhook error: ${response.status} - ${errorText}`);
+      throw new Error(`CRM webhook error: ${response.status} - ${responseText}`);
     }
 
-    const result = await response.json();
+    let result = null;
+    try {
+      result = JSON.parse(responseText);
+    } catch (e) {
+      result = responseText;
+    }
     console.log('✅ CRM sync successful:', result);
     return { success: true, result };
-    
+
   } catch (error) {
     console.error('❌ CRM sync failed:', error);
     // Don't throw - we don't want to fail the form submission
