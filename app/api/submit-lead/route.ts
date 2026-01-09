@@ -346,13 +346,14 @@ export async function POST(request: NextRequest) {
       phone: body.phone,
       phone_country_code: body.phone_country_code || '+48',
       contact_method: body.contact_method,
+      description: body.description, // <-- Fix: ensure description is included
       source: body.source,
       privacy_accepted: body.privacy_accepted,
-      
+
       // IP & Geolocation
       ip_address: ip_address || null,
       ...geoData,
-      
+
       // Tracking Data (from client)
       cookies_accepted: body.tracking?.cookies_accepted || false,
       browser_name: body.tracking?.browser_name || null,
