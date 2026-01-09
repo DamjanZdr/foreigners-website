@@ -179,7 +179,7 @@ async function sendEmailNotifications(
     if (adminEmail) {
       try {
         const adminResult = await resend.emails.send({
-          from: 'Website Leads <onboarding@resend.dev>',
+          from: 'Website Leads <noreply@foreigners.pl>',
           to: adminEmail,
           subject: `New Lead: ${leadData.full_name}`,
           html: AdminNotificationEmail({
@@ -218,7 +218,7 @@ async function sendEmailNotifications(
     // Send client confirmation email
     try {
       const clientResult = await resend.emails.send({
-        from: 'Foreigners <onboarding@resend.dev>',
+        from: 'Foreigners <noreply@foreigners.pl>',
         to: leadData.email,
         subject: 'Thank you for contacting us!',
         html: ClientConfirmationEmail({
