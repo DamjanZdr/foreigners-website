@@ -15,7 +15,7 @@ const partners = [
   {
     name: 'CREATE',
     logo: '/PartnersLogos/create.jpg',
-    url: 'https://create.com'
+    url: 'https://alejejerozolimskie109.pl/'
   },
   {
     name: 'Easy Learning Complex Cien',
